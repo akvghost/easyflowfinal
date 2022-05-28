@@ -1,0 +1,48 @@
+.checkBox1 {
+  padding-left: 5%;
+}
+
+.checkBox2 {
+  padding-left: 3%;
+}
+
+body {
+  background: #007bff !important;
+  background: linear-gradient(to right, #0062e6, #33aeff) !important;
+}
+
+#logoImg {
+  margin-left: 30px;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+  margin-right: 0%;
+}
+
+#navbarDropdown {
+  margin-top: 30%;
+  margin-left: 0%;
+}
+
+.mt-10 {
+  margin-top: 1% !important;
+  margin-bottom: 1% !important;
+}
+
+.container {
+  margin: 5%;
+}
+
+.padding {
+  padding: 1px;
+}
+
+#notification {
+  padding-top: 10px;
+  color: red;
+};
+
+.invalid-feedback{
+  color: black;
+}

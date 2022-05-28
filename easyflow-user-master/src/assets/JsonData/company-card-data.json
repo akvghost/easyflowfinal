@@ -1,0 +1,37 @@
+[
+    {
+        "icon": "bx bx-user-pin",
+        
+        "title": "Update Profile",
+        "route": "/updatecompanyprofile"
+    },
+    {
+        "icon": "bx bx-check-shield",
+        
+        "title": "Update Password",
+        "route": "/updatecompanypassword"
+    },
+    {
+        "icon": "bx bxs-plane-take-off",
+        
+        "title": "Send Requests",
+        "route": "/Companysendrequest"
+    },
+    {
+        "icon": "bx bxs-plane-land",
+        
+        "title": "View Requests",
+        "route": "/registrationlogin"
+    },
+    {
+        "icon": "bx bx-receipt",
+        
+        "title": "View Report",
+        "route": "/companyreport"
+    },
+    {
+        "icon": "bx bx-log-out",
+        "title": "Log Out",
+        "route": "/registrationlogin"
+    }
+]
