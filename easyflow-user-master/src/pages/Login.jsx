@@ -44,6 +44,8 @@ export const Login = () => {
     }
     return (
         <div>
+            <h2 className="page-header">Register</h2>
+            <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
                 <div className="col-12">
                     <label htmlFor="inputName" className="form-label">

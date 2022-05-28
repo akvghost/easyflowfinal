@@ -80,7 +80,7 @@ const Topnav = () => {
                 <div className="topnav__right-item">
                     <Dropdown
                         icon='bx bx-bell'
-                        badge='12'
+                        badge=''
                         contentData={notificationList}
                         renderItems={(item, index) => renderNotificationItem(item, index)}
                         renderFooter={() => <Link to='/'>View All</Link>}
