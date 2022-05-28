@@ -38,9 +38,10 @@ const chartOptions = {
 
 const topUsers = {
   head: [
-    'Serial',
     'Worker Name',
     'Contact',
+    'Type',
+    'Location',
     'Date'
   ],
   body: [
@@ -139,7 +140,7 @@ export const CompanyReport = () => {
             />
           </div>
           <div className="card__footer">
-            <Link to='/'>view all</Link>
+            <Link to='/previousworkers'>view all</Link>
           </div>
         </div>
       </div>

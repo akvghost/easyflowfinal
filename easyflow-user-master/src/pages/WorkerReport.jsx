@@ -39,9 +39,10 @@ const chartOptions = {
 
 const topUsers = {
   head: [
-    'Serial',
     'Company Name',
     'Contact',
+    'Type',
+    'Location',
     'Date'
   ],
   body: [
@@ -84,9 +85,10 @@ const renderUserHead = (item, index) => (
 
 const renderUserBody = (item, index) => (
   <tr key={index}>
-    <td>{item.serial}</td>
-    <td>{item.companyname}</td>
-    <td>{item.contact}</td>
+    <td>{item.companyName}</td>
+    <td>{item.companyMobile}</td>
+    <td>{item.companyType}</td>
+    <td>{item.companyLocation}</td>
     <td>{item.date}</td>
   </tr>
 )
@@ -142,7 +144,7 @@ export const WorkerReport = () => {
             />
           </div>
           <div className="card__footer">
-            <Link to='/'>view all</Link>
+            <Link to='/previouscompany'>view all</Link>
           </div>
         </div>
       </div>
