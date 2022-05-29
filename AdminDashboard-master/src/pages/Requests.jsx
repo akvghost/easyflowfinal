@@ -61,9 +61,24 @@ const renderRequestBody = (item, index) => (
         <td>{item.Vacancy}</td>
     </tr>
 )
+const latestWorkerRequest = [
+    'name',
+    'type',
+    'location'
+]
+
+const renderWorkerRequestHead = (item, index) => <th key={index}>{item}</th>
+
+const renderWorkerRequestBody = (item, index) => (
+    <tr key={index}>
+        <td>{item.name}</td>       
+        <td>{item.type}</td>
+        <td>{item.location}</td>
+    </tr>
+)
 export const Requests = () => {
     const [requestList, setRequestList] = useState([])
-    function getRequest(){
+    function getRequest() {
         axios.get('http://localhost:5000/api/companies/checkrequeststatus')
             .then((response) => response.data)
             .then((data) => {
@@ -83,18 +98,35 @@ export const Requests = () => {
                             requestCards.map((item, index) => (
                                 <div className="col-6">
                                     <Link to={item.route} key={index}>
-                                    <RequestCard
-                                        icon={item.icon}
-                                        count={item.count}
-                                        title={item.title}
-                                    />
+                                        <RequestCard
+                                            icon={item.icon}
+                                            count={item.count}
+                                            title={item.title}
+                                        />
                                     </Link>
                                 </div>
                             ))
                         }
                     </div>
                 </div>
+                <div className="col-3">
+                    <div className="request-card">
+                        <div className="request-card__info">
+                            <h3>Send request to worker</h3>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-3">
+                    <div className="request-card">
+                        <div className="request-card__info">
+                            <h3>Send Request to Company</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+
             <div className="row">
                 <div className="col-6">
                     <div className="card">
@@ -122,10 +154,10 @@ export const Requests = () => {
                         </div>
                         <div className="card__body">
                             <Table
-                                headData={latestRequest.header}
-                                renderHead={(item, index) => renderRequestHead(item, index)}
+                                headData={latestWorkerRequest}
+                                renderHead={(item, index) => renderWorkerRequestHead(item, index)}
                                 bodyData={requestList}
-                                renderBody={(item, index) => renderRequestBody(item, index)}
+                                renderBody={(item, index) => renderWorkerRequestBody(item, index)}
                             />
                         </div>
                         <div className="card__footer">

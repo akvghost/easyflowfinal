@@ -5,12 +5,10 @@ import Table from '../components/table/Table'
 import axios from 'axios'
 
 const workerTableHead = [
-    'id',
     'name',
     'email',
     'phone',
-    'total orders',
-    'total spend',
+    'type',
     'location'
 ]
 
@@ -18,12 +16,10 @@ const renderHead = (item, index) => <th key={index}>{item}</th>
 
 const renderBody = (item, index) => (
     <tr key={index}>
-        <td>{item.id}</td>
         <td>{item.name}</td>
         <td>{item.email}</td>
         <td>{item.phone}</td>
-        <td>{item.total_orders}</td>
-        <td>{item.total_spend}</td>
+        <td>{item.type}</td>
         <td>{item.location}</td>
     </tr>
 )
