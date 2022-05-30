@@ -21,7 +21,7 @@
         "icon": "bx bxs-plane-land",
         
         "title": "View Requests",
-        "route": "/registrationlogin"
+        "route": "/companyviewrequest"
     },
     {
         "icon": "bx bx-receipt",
