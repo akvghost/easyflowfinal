@@ -27,6 +27,6 @@
     {
         "icon": "bx bx-log-out",
         "title": "Log Out",
-        "route": "/registrationlogin"
+        "route": "/loginworker"
     }
 ]
