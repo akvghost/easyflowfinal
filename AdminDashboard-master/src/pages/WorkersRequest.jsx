@@ -5,6 +5,7 @@ import Table from '../components/table/Table'
 import axios from 'axios'
 
 const workerTableHead = [
+    'Serial',
     'name',
     'email',
     'phone',
@@ -16,10 +17,11 @@ const renderHead = (item, index) => <th key={index}>{item}</th>
 
 const renderBody = (item, index) => (
     <tr key={index}>
-        <td>{item.name}</td>
-        <td>{item.email}</td>
-        <td>{item.phone}</td>
-        <td>{item.type}</td>
+        <td>{item.serial}</td>
+        <td>{item.workerName}</td>
+        <td>{item.workerMail}</td>
+        <td>{item.workerMobile}</td>
+        <td>{item.workerType}</td>
         <td>{item.location}</td>
     </tr>
 )
@@ -27,15 +29,14 @@ const renderBody = (item, index) => (
 const WorkersRequest = () => {
     const [workersRequestList, setWorkerRequestList] = useState([])
     function getWorkerRequestList(){
-        axios.get('http://localhost:5000/api/workers/checkrequeststatus')
-             .then((response) => response.data)
-             .then((data) => {
-                 setWorkerRequestList(data)
-             })
-             .catch((err) => {
-                 console.log("here's an error" + err)
-             })
-    }
+        axios.get('http://localhost:5000/api/admins/totalrequests/workers')
+            .then((response) => response.data)
+            .then((data) => {
+                setWorkerRequestList(data)
+                
+
+            })
+    }console.log(workersRequestList)
     useEffect(() => {
         getWorkerRequestList()
     }, [])
@@ -53,7 +54,7 @@ const WorkersRequest = () => {
                     <div className="card">
                         <div className="card__body">
                             <Table
-                                limit='10'
+                                limit={workersRequestList.length-1}
                                 headData={workerTableHead}
                                 renderHead={(item, index) => renderHead(item, index)}
                                 bodyData={workersRequestList}

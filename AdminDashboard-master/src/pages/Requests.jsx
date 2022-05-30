@@ -56,9 +56,9 @@ const renderRequestHead = (item, index) => (
 )
 const renderRequestBody = (item, index) => (
     <tr key={index}>
-        <td>{item.Company}</td>
-        <td>{item.Type}</td>
-        <td>{item.Vacancy}</td>
+        <td>{item.companyName}</td>
+        <td>{item.workerType}</td>
+        <td>{item.vacancy}</td>
     </tr>
 )
 const latestWorkerRequest = [
@@ -71,8 +71,8 @@ const renderWorkerRequestHead = (item, index) => <th key={index}>{item}</th>
 
 const renderWorkerRequestBody = (item, index) => (
     <tr key={index}>
-        <td>{item.name}</td>       
-        <td>{item.type}</td>
+        <td>{item.workerName}</td>       
+        <td>{item.workerType}</td>
         <td>{item.location}</td>
     </tr>
 )
@@ -85,8 +85,47 @@ export const Requests = () => {
                 setRequestList(data)
             })
     }
+    const sendRequestToWorker = () => {
+        axios.get('http://localhost:5000/api/admins/postrequest/worker')
+        .then((response) => alert(response.data))
+        
+    }
+    const [requestresp , setRequestresp] = useState([])
+    const sendRequestToCompany = () => {
+        
+        axios.get('http://localhost:5000/api/admins/postrequest/company')
+        .then((response) => response.data)
+        .then((data) => {
+            setRequestresp(data)
+            console.log(requestresp)
+
+        })
+        console.log(requestresp)
+    }
+    const [workersRequestList, setWorkerRequestList] = useState([])
+    function getWorkerRequestList(){
+        axios.get('http://localhost:5000/api/admins/totalrequests/workers')
+            .then((response) => response.data)
+            .then((data) => {
+                setWorkerRequestList(data)
+                
+
+            })
+    }console.log(workersRequestList)
+    const [companyRequestList, setCompanyRequestList] = useState([])
+    function getCompanyRequest(){
+        axios.get('http://localhost:5000/api/admins/getlatestrequestsfordashboard')
+            .then((response) => response.data)
+            .then((data) => {
+                setCompanyRequestList(data)
+                
+
+            })
+    }console.log(companyRequestList)
     useEffect(() => {
         getRequest()
+        getWorkerRequestList()
+        getCompanyRequest()
     }, [])
     return (
         <div>
@@ -111,14 +150,14 @@ export const Requests = () => {
                 </div>
                 <div className="col-3">
                     <div className="request-card">
-                        <div className="request-card__info">
+                        <div className="request-card__info" onClick={sendRequestToWorker}>
                             <h3>Send request to worker</h3>
                         </div>
                     </div>
                 </div>
                 <div className="col-3">
                     <div className="request-card">
-                        <div className="request-card__info">
+                        <div className="request-card__info" onClick={sendRequestToCompany}>
                             <h3>Send Request to Company</h3>
                         </div>
                     </div>
@@ -135,9 +174,10 @@ export const Requests = () => {
                         </div>
                         <div className="card__body">
                             <Table
+                            limit={companyRequestList.length-1}
                                 headData={latestRequest.header}
                                 renderHead={(item, index) => renderRequestHead(item, index)}
-                                bodyData={requestList}
+                                bodyData={companyRequestList}
                                 renderBody={(item, index) => renderRequestBody(item, index)}
                             />
                         </div>
@@ -154,9 +194,10 @@ export const Requests = () => {
                         </div>
                         <div className="card__body">
                             <Table
+                            limit={workersRequestList.length-1}
                                 headData={latestWorkerRequest}
                                 renderHead={(item, index) => renderWorkerRequestHead(item, index)}
-                                bodyData={requestList}
+                                bodyData={workersRequestList}
                                 renderBody={(item, index) => renderWorkerRequestBody(item, index)}
                             />
                         </div>

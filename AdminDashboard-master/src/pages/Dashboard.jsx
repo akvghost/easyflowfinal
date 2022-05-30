@@ -86,8 +86,8 @@ const renderUserHead = (item, index) => (
 
 const renderUserBody = (item, index) => (
     <tr key={index}>
-        <td>{item.username}</td>
-        <td>{item.profile}</td>
+        <td>{item.workerName}</td>
+        <td>{item.workerType}</td>  
         <td>{item.ratings}</td>
     </tr>
 )
@@ -140,7 +140,7 @@ const latestRequest = {
 }
 
 const requestStatus = {
-    "pending": "warning",
+    "Request is Processing": "warning",
     "hired": "success",
     "rejected": "danger"
 }
@@ -152,26 +152,38 @@ const renderRequestHead = (item, index) => (
 const renderRequestBody = (item, index) => (
     <tr key={index}>
         <td>{item.serial}</td>
-        <td>{item.Company}</td>
-        <td>{item.Type}</td>
-        <td>{item.Vacancy}</td>
+        <td>{item.companyName}</td>
+        <td>{item.workerType}</td>
+        <td>{item.vacancy}</td>
         <td>
-            <Badge type={requestStatus[item.status]} content={item.status} />
+            <Badge type={requestStatus[item.requestState]} content={item.requestState} />
         </td>
     </tr>
 )
+
 const Dashboard = () => {
         const [count, setCount] = useState([])
-       async function getEvents(){
-          var x=  await axios.get("http://localhost:5000/api/admins/dashboard")
-                //  .then((response) => response.data)
-                //  .then((data) => {
-                //      setCount(data)
-                //  })
-                 console.log("response"+x)
-        }
+    const [companyRequestList, setCompanyRequestList] = useState([])
+    function getCompanyRequest(){
+        axios.get('http://localhost:5000/api/admins/getlatestrequestsfordashboard')
+            .then((response) => response.data)
+            .then((data) => {
+                setCompanyRequestList(data)
+            })
+    }console.log(companyRequestList)
+    const [topworkerList, setTopWorkerList] = useState([])
+    function getTopWorker(){
+        axios.get('http://localhost:5000/api/admins/topworker')
+            .then((response) => response.data)
+            .then((data) => {
+                setTopWorkerList(data)
+
+            })
+    }console.log(topworkerList)
         useEffect(() => {
-            getEvents()
+            // getEvents()
+            getTopWorker()
+            getCompanyRequest()
         }, [])
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
     return (
@@ -226,19 +238,20 @@ const Dashboard = () => {
                 <div className="col-6">
                     <div className="card">
                         <div className="card__header">
-                            <h3>top users</h3>
+                            <h3>top workers</h3>
                         </div>
                         <div className="card__body">
                             <Table
+                            limit='4' 
                                 headData={topUsers.head}
                                 renderHead={(item, index) => renderUserHead(item, index)}
-                                bodyData={count}
+                                bodyData={topworkerList}
                                 renderBody={(item, index) => renderUserBody(item, index)}
                             />
                         </div>
-                        <div className="card__footer">
+                        {/* <div className="card__footer">
                             <Link to='/'>view all</Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="col-6">
@@ -248,14 +261,15 @@ const Dashboard = () => {
                         </div>
                         <div className="card__body">
                             <Table
+                            limit='2'
                                 headData={latestRequest.header}
                                 renderHead={(item, index) => renderRequestHead(item, index)}
-                                bodyData={count}
+                                bodyData={companyRequestList}
                                 renderBody={(item, index) => renderRequestBody(item, index)}
                             />
                         </div>
                         <div className="card__footer">
-                            <Link to='/'>view all</Link>
+                            <Link to='/companyrequest'>view all</Link>
                         </div>
                     </div>
                 </div>
@@ -263,5 +277,7 @@ const Dashboard = () => {
         </div>
     )
 }
-
 export default Dashboard
+
+
+
