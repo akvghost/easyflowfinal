@@ -20,10 +20,13 @@ import { UpdateCompanyPassword } from '../pages/UpdateCompanyPassword'
 import { UpdateCompanyPass } from '../pages/UpdateCompanyPass'
 import { CompanyReport } from '../pages/CompanyReport'
 import { CompanySendRequest } from '../pages/CompanySendRequest'
-import { Login } from '../pages/Login'
-import PostForm from '../pages/PostForm'
+import { RegisterWorker } from '../pages/RegisterWorker'
+// import {PostForm} from '../pages/PostForm'
 import { PreviousWorkers } from '../pages/PreviousWorkers'
 import { PreviousCompany } from '../pages/PreviousCompany'
+import { RegisterCompany } from '../pages/RegisterCompany'
+import { LoginCompany } from '../pages/LoginCompany'
+import { LoginWorker } from '../pages/LoginWorker'
 
 
 
@@ -39,8 +42,9 @@ const Routes = () => {
             <Route path='/updateworkerpass' component={UpdateWorkerPass}/>
             <Route path='/workerreport' component={WorkerReport}/>
             <Route path='/workersendrequest' component={WorkerSendRequest}/>
-            <Route path='/login' component={Login}/>
-            <Route path='/postForm' component={PostForm}/>
+            <Route path='/registerworker' component={RegisterWorker}/>
+            <Route path='/loginworker' component={LoginWorker}/>
+            {/* <Route path='/postForm' component={PostForm}/> */}
             <Route path='/previouscompany' component={PreviousCompany}/>
             
 
@@ -52,6 +56,8 @@ const Routes = () => {
             <Route path='/companyreport' component={CompanyReport}/>
             <Route path='/Companysendrequest' component={CompanySendRequest}/>
             <Route path='/previousworkers' component={PreviousWorkers}/>
+            <Route path='/registercompany' component={RegisterCompany}/>
+            <Route path='/logincompany' component={LoginCompany}/>
 
         </Switch>
     )

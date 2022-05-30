@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 
-export const Login = () => {
+export const RegisterWorker = () => {
     const url = "http://localhost:5000/api/workers/register"
     const [data, setData] = useState({
         name: "",
@@ -103,8 +103,7 @@ export const Login = () => {
                         <option values="masion">Masion</option>
                         <option values="labour">Labour</option>
 
-                    </select>
-                    <div className="invalid-feedback">Please select a valid state.</div>
+                    </select>                    
                 </div>
                 <div className="col-12">
                     <label htmlFor="exampleInputPassword1" className="form-label">
@@ -123,6 +122,7 @@ export const Login = () => {
                         Submit
                     </button>
                 </div>
+                <a href="/loginworker">Already Have Account?</a>
             </form>
         </div>
     )
