@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginWorker = () => {
     const url = "http://localhost:5000/api/workers/login"
@@ -37,20 +39,37 @@ export const LoginWorker = () => {
             response.data = res.data
             console.log(response.data)
             console.log(response.status)
-            checkislogin()
+            if(response.status == "204" || response.status == "200"){
+                toast("Login Successful",{
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                }    
+            
         })}
         catch(err){console.log(err)}
         console.log(response.status)
+        setTimeout(() => {
+            checkislogin(e)
+         }, 5200)
+        
+    
 
     }
-    function checkislogin()
+    function checkislogin(e)
     {
-        if(response.status == "204" || response.status == "200"){
-            alert("login succesful")
+        e.preventDefault ();
+
+            // alert("login succesful")
             console.log(response.status)
             window.location.href = "http://localhost:3000/worker"
-        }
-        else
+        // }
+        // else
         {console.log("in else")}
     }
   return (
@@ -69,7 +88,6 @@ export const LoginWorker = () => {
                 aria-describedby="emailHelp"
                 onChange={(e) => handle(e)}
                 value={data.email}
-
             />
 
         </div>
@@ -90,6 +108,16 @@ export const LoginWorker = () => {
             <button type="submit" className="btn btn-primary">
                 Login
             </button>
+            <ToastContainer 
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover/>
         </div>
         <a href="/registerworker">New Here?</a>
     </form>
