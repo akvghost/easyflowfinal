@@ -8,6 +8,11 @@ export const LoginWorker = () => {
         email: "",        
         pass: ""
     })
+    const [response , setResponse] = useState({
+        data:"",
+        status:""
+
+    })
     function handle(e) {
         // e.preventDefault()  ;
         console.log(e.target.value)
@@ -20,17 +25,33 @@ export const LoginWorker = () => {
             
 
     }
-    const [response , setResponse] = useState(["hhh"])
-    function submit(e) {
-        e.preventDefault();
+   
+     const submit = async (e) => {
+        e.preventDefault ();
+        try{
+        await axios.post(url, data)
+        .then(( res) =>  res)
+        .then((res) => {
 
-        axios.post(url, data)
-        .then((response) => response.status)
-        .then((status) => {
-            setResponse(status)
-            console.log(response)
-            
-        })
+            response.status=res.status
+            response.data = res.data
+            console.log(response.data)
+            console.log(response.status)
+            checkislogin()
+        })}
+        catch(err){console.log(err)}
+        console.log(response.status)
+
+    }
+    function checkislogin()
+    {
+        if(response.status == "204" || response.status == "200"){
+            alert("login succesful")
+            console.log(response.status)
+            window.location.href = "http://localhost:3000/worker"
+        }
+        else
+        {console.log("in else")}
     }
   return (
     <div>
@@ -54,7 +75,7 @@ export const LoginWorker = () => {
         </div>
        
         <div className="col-12">
-            <label htmlFor="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
                 Password
             </label>
             <input

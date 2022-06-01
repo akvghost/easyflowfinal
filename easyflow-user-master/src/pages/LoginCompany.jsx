@@ -3,6 +3,11 @@ import React from 'react'
 import { useState } from 'react'
 
 export const LoginCompany = () => {
+    const [response , setResponse] = useState({
+        data:"",
+        status:""
+    
+    })
   const url = "http://localhost:5000/api/companies/login"
     const [data, setData] = useState({
         email: "",        
@@ -30,10 +35,25 @@ export const LoginCompany = () => {
         console.log(data)
         console.log(data.type)
         axios.post(url, data)
-            .then(res => {
-                setData(res.data)
-                console.log(data)
+             .then((res) => res).then((res) => {
+
+                response.status=res.status
+                response.data = res.data
+                console.log(response.data)
+                console.log(response.status)
+                checkislogin()
             })
+            function checkislogin()
+    {
+        if(response.status == "204" || response.status == "200"){
+            alert("login succesful")
+            console.log(response.status)
+            window.location.href = "http://localhost:3000/company"
+        }
+        else
+        {console.log("in else")}
+    }
+            console.log(response.status)
     }
   return (
     <div>

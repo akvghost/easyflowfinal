@@ -6,6 +6,7 @@ import Table from '../components/table/Table'
 import { Link } from 'react-router-dom'
 //import CompanyRequest from './CompanyRequest'
 import axios from 'axios'
+
 const latestRequest = {
     header: [
 
@@ -77,6 +78,11 @@ const renderWorkerRequestBody = (item, index) => (
     </tr>
 )
 export const Requests = () => {
+    const [response , setResponse] = useState({
+        data:"",
+        status:""
+    
+    })
     const [requestList, setRequestList] = useState([])
     function getRequest() {
         axios.get('http://localhost:5000/api/companies/checkrequeststatus')
@@ -87,21 +93,32 @@ export const Requests = () => {
     }
     const sendRequestToWorker = () => {
         axios.get('http://localhost:5000/api/admins/postrequest/worker')
-        .then((response) => alert(response.data))
+        .then((res) => res).then((res) => {
+
+            response.status=res.status
+            response.data = res.data
+            console.log(response.data)
+            console.log(response.status)
+            // checkislogin()
+        })
+        
+        console.log(response.status)
         
     }
-    const [requestresp , setRequestresp] = useState([])
     const sendRequestToCompany = () => {
         
         axios.get('http://localhost:5000/api/admins/postrequest/company')
         .then((response) => response.data)
-        .then((data) => {
-            setRequestresp(data)
-            console.log(requestresp)
-            
+        .then((res) => res).then((res) => {
 
+            response.status=res.status
+            response.data = res.data
+            console.log(response.data)
+            console.log(response.status)
+            // checkislogin()
         })
-        console.log(requestresp)
+        
+        console.log(response.status)
     }
     const [workersRequestList, setWorkerRequestList] = useState([])
     function getWorkerRequestList(){

@@ -27,10 +27,35 @@ export const UpdateCompanyPassword = () => {
   function sendotp(e) {
     console.log("iam here");
     e.preventDefault();
-    setEmail()
-    axios.get('http://localhost:5000/api/companies/sendotp', email)
+    axios.post('http://localhost:5000/api/companies/sendotp', data)
       .then((response) => console.log(response.data))
 
+  }
+  const [verifydata, setVerifydata] = useState({
+    email: "",
+    otp:""
+  })
+  function handle1(e) {
+
+    // console.log(e.target.value)
+    // console.log(e.target.id)
+
+    const newdata = { ...verifydata }
+    newdata[e.target.id] = e.target.value
+    setVerifydata(newdata)
+    // console.log(verifydata)
+
+
+
+  }
+  const [otpres, setOtpres] = useState()
+  async function verifyotp(e) {
+    e.preventDefault();
+    verifydata.email = data.email
+    console.log(verifydata)
+     await axios.post('http://localhost:5000/api/companies/verifyotp', verifydata)
+       .then((response) => setOtpres(response.data))
+       console.log(otpres)
   }
   return (
     <div>
@@ -54,11 +79,11 @@ export const UpdateCompanyPassword = () => {
             <label htmlFor="validationCustom01" className="form-label">
               Enter OTP
             </label>
-            <input type="text" className="form-control" id="otp" onChange={(e) => handle(e)} value={data.otp} />
+            <input type="text" className="form-control" id="otp" onChange={(e) => handle1(e)} value={verifydata.otp} />
           </div>
           <div className="col-12">
             <Link to="/updatecompanypass">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick={(e) => verifyotp(e)}>
                 Verify OTP
               </button>
             </Link>
