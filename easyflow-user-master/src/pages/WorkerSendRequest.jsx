@@ -61,7 +61,7 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="validationCustom01" className="form-label">
               Name
             </label>
-            <input type="text" name={"name"} onChange={this.handleChange} className="form-control" id="validationCustom01" required=""/>
+            <input type="text" name={"name"} onChange={(e )=>{this.setState({name:e.target.value})}} className="form-control" id="validationCustom01" required=""/>
             <div class="valid-feedback">
       Looks good!
     </div>
@@ -70,19 +70,19 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="validationCustom01" className="form-label">
               Mobile
             </label>
-            <input type="text" name={"mobile"} onChange={this.handleChange} className="form-control" id="validationCustom01" required="" />
+            <input type="text" name={"mobile"} onChange={(e )=>{this.setState({mobile:e.target.value})}} className="form-control" id="validationCustom01" required="" />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" name={"email"} onChange={this.handleChange} className="form-control" id="inputEmail4" />
+            <input type="email" name={"email"} onChange={(e )=>{this.setState({email:e.target.value})}} className="form-control" id="inputEmail4" />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputState" className="form-label">
               Work Type
             </label>
-            <select id="inputState" name={"workerType"} onChange={this.handleChange} className="form-select">
+            <select id="inputState" name={"workerType"} onChange={(e )=>{this.setState({workerType:e.target.value})}} className="form-select">
               <option selected="">Select</option>
               <option>Carpenter</option>
               <option>Labour</option>
@@ -97,7 +97,7 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="inputState" className="form-label">
               City
             </label>
-            <select id="inputState" name={"city"} onChange={this.handleChange} className="form-select">
+            <select id="inputState" name={"city"} onChange={(e )=>{this.setState({city:e.target.value})}} className="form-select">
               <option selected="">Select</option>
               <option>Lucknow</option>
             </select>
@@ -106,7 +106,7 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="inputState" className="form-label">
               District
             </label>
-            <select id="inputState" name={"district"} onChange={this.handleChange} className="form-select">
+            <select id="inputState" name={"district"} onChange={(e )=>{this.setState({district:e.target.value})}} className="form-select">
               <option selected="">Select</option>
               <option>Lucknow</option>
             </select>
@@ -115,7 +115,7 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="inputState" className="form-label">
               Area
             </label>
-            <select id="inputState" name={"area"} onChange={this.handleChange} className="form-select">
+            <select id="inputState" name={"area"} onChange={(e )=>{this.setState({area:e.target.value})}} className="form-select">
               <option selected="">Select</option>
               <option>Aashiyana</option>
               <option>Aishbagh</option>
