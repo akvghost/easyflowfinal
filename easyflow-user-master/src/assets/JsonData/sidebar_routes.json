@@ -6,12 +6,12 @@
     },
     {
         "display_name": "Worker",
-        "route": "/worker",
+        "route": "/loginworker",
         "icon": "bx bx-user-pin"
     },
     {
         "display_name": "Company",
-        "route": "/company",
+        "route": "/logincompany",
         "icon": "bx bx-building-house"
     },
     {

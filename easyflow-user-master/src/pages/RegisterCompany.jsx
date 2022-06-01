@@ -3,12 +3,12 @@ import React from 'react'
 import { useState } from 'react'
 
 export const RegisterCompany = () => {
-    const url = "http://localhost:5000/api/company/register"
+    const url = "http://localhost:5000/api/companies/register"
     const [data, setData] = useState({
-        name: "",
-        mobile: "",
-        email: "",
-        password: ""
+        companyName: "",
+        companyMobile: "",
+        companymail: "",
+        companypass: ""
     })
     function handle(e) {
         // e.preventDefault()  ;
@@ -28,13 +28,7 @@ export const RegisterCompany = () => {
     function submit(e) {
         e.preventDefault();
         console.log(data)
-        axios.post(url, {
-            companyName: data.name,
-            companyMobile: data.mobile,
-            companyMail: data.email,            
-            companypass: data.password,
-            
-        })
+        axios.post(url, data)
             .then(res => {
                 setData(res.data)
                 console.log(data)
@@ -52,9 +46,9 @@ export const RegisterCompany = () => {
                     <input
                         type="text"
                         className="form-control"
-                        id="name"
+                        id="companyName"
                         onChange={(e) => handle(e)}
-                        value={data.name}
+                        value={data.companyName}
 
                     />
                 </div>
@@ -65,9 +59,9 @@ export const RegisterCompany = () => {
                     <input
                         type="text"
                         className="form-control"
-                        id="mobile"
+                        id="companyMobile"
                         onChange={(e) => handle(e)}
-                        value={data.mobile}
+                        value={data.companyMobile}
 
                     />
                 </div>
@@ -77,12 +71,12 @@ export const RegisterCompany = () => {
                         Email address
                     </label>
                     <input
-                        type="email"
+                        type="companymail"
                         className="form-control"
                         id="email"
                         aria-describedby="emailHelp"
                         onChange={(e) => handle(e)}
-                        value={data.email}
+                        value={data.companymail}
 
                     />
 
@@ -95,9 +89,9 @@ export const RegisterCompany = () => {
                     <input
                         type="password"
                         className="form-control"
-                        id="password"
+                        id="companypass"
                         onChange={(e) => handle(e)}
-                        value={data.password}
+                        value={data.companypass}
                     />
                 </div>
                 <div className='col-12 my-4' >

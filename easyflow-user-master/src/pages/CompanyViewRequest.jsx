@@ -6,7 +6,7 @@ import '../components/topnav/topnav.css'
 import axios from 'axios'
 
 const companyViewRequestTableHead = [
-    //'serial',
+    'serial',
     'worker name',
     'worker type',
     'mobile',
@@ -19,12 +19,12 @@ const renderHead = (item, index) => <th key={index}>{item}</th>
 
 const renderBody = (item, index) => (
     <tr key={index}>
-        {/* <td>{item.serial}</td> */}
+        <td>{item.serial}</td>
         <td>{item.workerName}</td>
         <td>{item.workerType}</td>
-        <td>{item.workerMobile}</td>
-        <td>{item.workerMail}</td>
-        <td>{item.workerLocation}</td>
+        <td>{item.mobile}</td>
+        <td>{item.email}</td>
+        <td>{item.location}</td>
 
     </tr>
 )
@@ -33,7 +33,7 @@ const renderBody = (item, index) => (
 export const CompanyViewRequest = () => {
     const [companyViewRequestList, setCompanyViewRequestList] = useState([])
     function getCompanyViewRequest() {
-        axios.get('http://localhost:5000/api/')
+        axios.get('http://localhost:5000/api/companies/viewrequests')
             .then((response) => response.data)
             .then((data) => {
                 setCompanyViewRequestList(data)
@@ -42,7 +42,8 @@ export const CompanyViewRequest = () => {
             .catch(err => console.log("here's an error" + err))
 
 
-    }
+    }console.log(companyViewRequestList)
+    
     useEffect(() => {
         getCompanyViewRequest()
     }, [])
@@ -56,7 +57,7 @@ export const CompanyViewRequest = () => {
                     <div className="card">
                         <div className="card__body">
                             <Table
-                                limit='10'
+                                limit={companyViewRequestList.length-1}
                                 headData={companyViewRequestTableHead}
                                 renderHead={(item, index) => renderHead(item, index)}
                                 bodyData={companyViewRequestList}

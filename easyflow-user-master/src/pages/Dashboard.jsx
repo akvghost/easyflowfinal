@@ -56,7 +56,7 @@ const Dashboard = () => {
                             <img src="https://source.unsplash.com/300x100/?carpenter,painter" className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-none d-md-block">
                                 <h5>EasyFlow</h5>
-                                <p>A Comman plateform for Workers and Employer.</p>
+                                <p>A Common platform for Workers and Employer.</p>
                             </div>
                         </div>
                         <div className="carousel-item">
@@ -70,7 +70,7 @@ const Dashboard = () => {
                             <img src="https://source.unsplash.com/300x100/?carpenter,worker" className="d-block w-100" alt="..." />
                             <div className="carousel-caption d-none d-md-block">
                                 <h5>EasyFlow</h5>
-                                <p>Register to avail opportunities.</p>
+                                <p>Be Your Own Contractor,  Get Your Work Done Faster.</p>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@ const Dashboard = () => {
                                         <p className="card-text mb-auto">
                                             Register and get opportunities to work in your desired location.
                                         </p>
-                                        <a href="/worker" className="stretched-link">
+                                        <a href="/worker" className="stretched-link" >
                                             Explore More
                                         </a>
                                     </div>

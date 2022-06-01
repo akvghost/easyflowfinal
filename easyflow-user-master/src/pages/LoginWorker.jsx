@@ -3,10 +3,10 @@ import React from 'react'
 import { useState } from 'react'
 
 export const LoginWorker = () => {
-    const url = "http://localhost:5000/api/worker/login"
+    const url = "http://localhost:5000/api/workers/login"
     const [data, setData] = useState({
         email: "",        
-        password: ""
+        pass: ""
     })
     function handle(e) {
         // e.preventDefault()  ;
@@ -16,26 +16,21 @@ export const LoginWorker = () => {
         const newdata = { ...data }
         newdata[e.target.id] = e.target.value
         setData(newdata)
-        // console.log("new")
-       console.log(newdata)
-        // console.log("data")
-        // console.log(data)
 
+            
 
     }
+    const [response , setResponse] = useState(["hhh"])
     function submit(e) {
         e.preventDefault();
-        console.log(data)
-        axios.post(url, {
-           
-            workerMail: data.email,            
-            workerpass: data.password
+
+        axios.post(url, data)
+        .then((response) => response.status)
+        .then((status) => {
+            setResponse(status)
+            console.log(response)
             
         })
-            .then(res => {
-                setData(res.data)
-                console.log(data)
-            })
     }
   return (
     <div>
@@ -65,14 +60,14 @@ export const LoginWorker = () => {
             <input
                 type="password"
                 className="form-control"
-                id="password"
+                id="pass"
                 onChange={(e) => handle(e)}
-                value={data.password}
+                value={data.pass}
             />
         </div>
         <div className='col-12 my-4' >
             <button type="submit" className="btn btn-primary">
-                Submit
+                Login
             </button>
         </div>
         <a href="/registerworker">New Here?</a>

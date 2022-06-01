@@ -12,10 +12,15 @@ const Table = props => {
 
     let range = []
 
+console.log("this is fjsdlkfj")
     if (props.limit !== undefined) {
         let page = Math.floor(props.bodyData.length / Number(props.limit))
+        
         pages = props.bodyData.length % Number(props.limit) === 0 ? page : page + 1
+        console.log(pages)
+
         range = [...Array(pages).keys()]
+        console.log(...Array(pages).keys())
     }
 
     const [currPage, setCurrPage] = useState(0)
@@ -26,7 +31,7 @@ const Table = props => {
 
         setDataShow(props.bodyData.slice(start, end))
 
-        setCurrPage(page)
+        setCurrPage(pages)
     }
 
     return (

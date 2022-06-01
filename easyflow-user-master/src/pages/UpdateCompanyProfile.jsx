@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 // add the path below where you want to update company
 const url = ""
 export const UpdateCompanyProfile = (props) => {
-  props.state = {
-    name: '',
-    email: '',
-    gstin: '',
-    cin: '',
-    workType: '',
-  }
+ 
+  const [data, setData] = useState({
+    companyName: "",
+    companyMobile: "",
+    companymail: "",
+    companypass: ""
+})
 
   const handleChange = (e) => {
-    const name = e.target.name
+    const name = e.target.comapnyName
     const value = e.target.value
     this.setState({
       [name]: value
@@ -86,32 +86,32 @@ export const UpdateCompanyProfile = (props) => {
             <label htmlFor="inputEmail4" className="form-label">
               Name
             </label>
-            <input type="email" name="name" value={this.state.name} onChange={handleChange} className="form-control" id="inputEmail4" />
+            <input type="email" name="name" value={this.data.companyName} onChange={handleChange} className="form-control" id="inputEmail4" />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputPassword4" className="form-label">
               Email
             </label>
-            <input type="email" name="email" value={this.state.email} onChange={handleChange} className="form-control" id="inputPassword4" />
+            <input type="email" name="email" value={this.data.companyName} onChange={handleChange} className="form-control" id="inputPassword4" />
           </div>
 
           <div className="col-md-4">
             <label htmlFor="inputCity" className="form-label">
               GSTIN
             </label>
-            <input type="text" name="gstin" value={this.state.gstin} onChange={handleChange} className="form-control" id="inputCity" />
+            <input type="text" name="gstin" value={this.data.companyName} onChange={handleChange} className="form-control" id="inputCity" />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputZip" className="form-label">
               CIN
             </label>
-            <input type="text" name="cin" value={this.state.cin} onChange={handleChange} className="form-control" id="inputZip" />
+            <input type="text" name="cin" value={this.data.companyName} onChange={handleChange} className="form-control" id="inputZip" />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputState" className="form-label">
               Work Type
             </label>
-            <select id="inputState" name="workType" value={this.state.workType} onChange={handleChange} className="form-select">
+            <select id="inputState" name="workType" value={this.data.companyNames} onChange={handleChange} className="form-select">
             <option selected="">Select</option>
               <option>Carpenter</option>
               <option>Labour</option>

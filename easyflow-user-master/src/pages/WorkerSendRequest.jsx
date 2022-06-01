@@ -11,7 +11,7 @@ export  class WorkerSendRequest extends Component {
       name: '',
       email: '',
       mobile: '',
-      workType: '',
+      workerType: '',
       city: '',
       district: '',
       area: '',
@@ -24,7 +24,7 @@ export  class WorkerSendRequest extends Component {
     this.setState({ name: e.target.value})
     this.setState({ email: e.target.value})
     this.setState({ mobile: e.target.value})
-    this.setState({ workType: e.target.value})
+    this.setState({ workerType: e.target.value})
     this.setState({ city: e.target.value})
     this.setState({ district: e.target.value })
     this.setState({ area: e.target.value})
@@ -32,18 +32,20 @@ export  class WorkerSendRequest extends Component {
    handleSubmit = (e) => {
     e.preventDefault()
     const user = {
-      name: this.state.name,
-      email: this.state.email,
-      mobile: this.state.mobile,
-      workType: this.state.workType,
-      city: this.state.city,
-      district: this.state.district,
+      // name: this.state.name,
+      // email: this.state.email,
+      // mobile: this.state.mobile,
+      workerType: this.state.workType,
+      // city: this.state.city,
+      // district: this.state.district,
       area: this.state.area
     }
+    console.log(user.workerType)
     // add here the path where you want to save these details
-    axios.post('', user)
+    axios.post('http://localhost:5000/api/workers/apply', user)
          .then((response) => response.data)
          .catch((err) => console.log(err))
+         
   }
   render() {
   return (

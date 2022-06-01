@@ -3,10 +3,10 @@ import React from 'react'
 import { useState } from 'react'
 
 export const LoginCompany = () => {
-  const url = "http://localhost:5000/api/company/login"
+  const url = "http://localhost:5000/api/companies/login"
     const [data, setData] = useState({
         email: "",        
-        password: ""
+        pass: ""
     })
     function handle(e) {
         // e.preventDefault()  ;
@@ -20,18 +20,16 @@ export const LoginCompany = () => {
        console.log(newdata)
         // console.log("data")
         // console.log(data)
+        
 
 
     }
     function submit(e) {
         e.preventDefault();
+        console.log("thljflkadf")
         console.log(data)
-        axios.post(url, {
-           
-          companyMail: data.email,            
-          companypass: data.password
-            
-        })
+        console.log(data.type)
+        axios.post(url, data)
             .then(res => {
                 setData(res.data)
                 console.log(data)
@@ -65,14 +63,14 @@ export const LoginCompany = () => {
             <input
                 type="password"
                 className="form-control"
-                id="password"
+                id="pass"
                 onChange={(e) => handle(e)}
-                value={data.password}
+                value={data.pass}
             />
         </div>
         <div className='col-12 my-4' >
             <button type="submit" className="btn btn-primary">
-                Submit
+                Login
             </button>
         </div>
         <a href="/registercompany">New Here?</a>
