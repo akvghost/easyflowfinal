@@ -6,7 +6,24 @@ import {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 export const UpdateWorkerPassword = () => {
-  const [email, setEmail] = useState([])
+  const [data, setData] = useState({
+    email: ""
+})
+function handle(e) {
+    // e.preventDefault()  ;
+    console.log(e.target.value)
+    console.log(e.target.id)
+
+    const newdata = { ...data }
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    // console.log("new")
+   console.log(newdata)
+    // console.log("data")
+    // console.log(data)
+
+
+}
     function sendotp(e){
         console.log("iam here");
         e.preventDefault()  ;
@@ -26,7 +43,7 @@ export const UpdateWorkerPassword = () => {
             <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" className="form-control" id="inputEmail4" />
+            <input type="email" className="form-control" id="mail" onChange={(e) => handle(e)} value={data.email}/>
           </div>
           <div className="col-md-6">
             <button type="submit" className="btn btn-primary" onClick={(e) => sendotp(e)}>
@@ -34,7 +51,7 @@ export const UpdateWorkerPassword = () => {
             </button>
           </div>
           <div className="col-md-6">
-            <label htmlFor="inputEmail4" className="form-label">
+            <label htmlFor="inputEmail4" className="form-label" id="otp">
               Enter OTP
             </label>
             <input type="email" className="form-control" id="inputEmail4" />
