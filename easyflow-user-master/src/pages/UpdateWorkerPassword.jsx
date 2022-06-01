@@ -1,5 +1,7 @@
+import axios from 'axios'
 import React from 'react'
-import {useState} from 'react'
+import {useState} from 'react' 
+
 
 import { Link } from 'react-router-dom'
 
@@ -9,13 +11,9 @@ export const UpdateWorkerPassword = () => {
         console.log("iam here");
         e.preventDefault()  ;
         setEmail()
-        // axios.get('http://localhost:5000/api/companies')
-        //     .then((response) => response.data)
-        //     .then((data) => {
-        //         setCompanyList(data)
-        //         console.log(setCompanyList)
-                
-        //     })
+        axios.get('http://localhost:5000/api/workers/sendotp',email)
+            .then((response) => console.log(response.data))
+            
     }
   return (
     <div>

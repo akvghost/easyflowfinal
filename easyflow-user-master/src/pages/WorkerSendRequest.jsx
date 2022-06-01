@@ -35,16 +35,17 @@ export  class WorkerSendRequest extends Component {
       // name: this.state.name,
       // email: this.state.email,
       // mobile: this.state.mobile,
-      workerType: this.state.workType,
-      // city: this.state.city,
-      // district: this.state.district,
+      workerType: this.state.workerType,
+      city: this.state.city,
+      district: this.state.district,
       area: this.state.area
     }
+    console.log(user)
     console.log(user.workerType)
     // add here the path where you want to save these details
-    axios.post('http://localhost:5000/api/workers/apply', user)
-         .then((response) => response.data)
-         .catch((err) => console.log(err))
+    // axios.post('http://localhost:5000/api/workers/apply', user)
+    //      .then((response) => response.data)
+    //      .catch((err) => console.log(err))
          
   }
   render() {
@@ -81,7 +82,7 @@ export  class WorkerSendRequest extends Component {
             <label htmlFor="inputState" className="form-label">
               Work Type
             </label>
-            <select id="inputState" name={"workType"} onChange={this.handleChange} className="form-select">
+            <select id="inputState" name={"workerType"} onChange={this.handleChange} className="form-select">
               <option selected="">Select</option>
               <option>Carpenter</option>
               <option>Labour</option>
