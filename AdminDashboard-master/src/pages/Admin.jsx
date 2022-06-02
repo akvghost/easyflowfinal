@@ -1,82 +1,74 @@
 import React, {useEffect,useState} from 'react'
 import axios from 'axios'
-const url = ""
-export const Admin = () => {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+    export const Admin = () => {
+    const url = "http://localhost:5000/api/admins/update"
+    const [response, setResponse] = useState({
+        data: "",
+        status: ""
+
+    })
     const [data, setData] = useState({
         Name: "",
         mobile: "",
         email: "",
-        pass: ""
     })
-    
-      const handleChange = (e) => {
-        const name = e.target.Name
-        const value = e.target.value
-        this.setState({
-          [name]: value
-      })
-      }
-      const handleSubmit = (e) => {
-        e.preventDefault()
-        if(this.state.id){
-          updateRecord()
-        }else{
-          console.log("No Record found!")
-        }
-      }
-      const getAdminId = (e) => {
-        const { id } = this.state
-            const Id = url + id
-            console.log(Id)
-            axios.get(Id)
-                .then((res) => res.json())
-                .then((results) => {
-                    if(results){
-                        this.setState({
-                          name: results.name,
-                          email: results.email,
-                          mobile: results.mobile,
-                         
+    function handle(e) {
+
+        const newdata = { ...data }
+        newdata[e.target.id] = e.target.value
+        setData(newdata)
+
+
+
+    }
+    const submit = async (e) => {
+        e.preventDefault();
+        console.log(data)
+        try {
+            await axios.patch(url, data,)
+                .then((res) => res)
+                .then((res) => {
+
+                    response.status = res.status
+                    response.data = res.data
+                    console.log(response.data)
+                    console.log(response.status)
+                    if (response.status == "204" || response.status == "200") {
+                        toast("Updated Successfully", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
                         });
-                    }else{
-                        alert("No Record Fount!")
                     }
-                }
-                )
-      }
-      const updateRecord = () => {
-        let head = {
-          id: this.state.id,
-          name: this.state.name,
-          email: this.state.email,
-          gstin: this.state.mobile,
-          
-      }
-      const baseUrl = url + this.state.id
-      console.log(baseUrl)
-      axios.post(baseUrl, head)
-          .then((res) => {
-              return res.json()
-          })
-          .then((results) => {
-              if(results){
-                  alert("Admin Updated Successfully!")
-              }
-          })
-          .catch((error) => {
-              alert("Can not update Admin, there is an error")
-              console.log(error)
-          })
-      }
+
+                })
+        }
+        catch (err) { console.log(err) }
+        console.log(response.status)
+     }
+     function checkp()
+     {
+         console.log("here")
+         axios.patch("http://localhost:5000/api/admins/p",{
+
+         })
+         .then((res) => console.log(res))
+     }
+     
       useEffect(() => {
-        getAdminId()
       })
 
     return (
         <div>
             <h2 className="page-header">Profile</h2>
             <div>
-                <form className="row g-3" onSubmit={handleSubmit}>
+                <form className="row g-3" onSubmit={(e) => submit(e)}>
                     <div className="col-md-4">
                         <label  className="form-label" >
                             ID
@@ -84,24 +76,23 @@ export const Admin = () => {
                         <input
                             type="text"
                             className="form-control"
-                            
                             placeholder=""
                             //required=""
                             disabled=""   
                         />
                     </div>
                     <div className="col-md-4">
-                        <label htmlFor="validationDefault02" className="form-label">
+                        <label htmlFor="validationDefault02" className="form-label" >
                             Name
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="validationDefault02"
+                            id="Name"
                             defaultValue="Ankush Kumar Verma"
                             required=""
-                            value={this.data.Name}
-                             onChange={handleChange}
+                            value={data.Name}
+                            onChange={(e) => handle(e)}
                         />
                     </div>
                    
@@ -116,11 +107,11 @@ export const Admin = () => {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="validationDefault04"
+                                id="email"
                                 aria-describedby="inputGroupPrepend2"
                                 required=""
-                                value={this.data.email} 
-                                onChange={handleChange}
+                                value={data.email} 
+                                onChange={(e) => handle(e)}
                             />
                         </div>
                     </div>
@@ -134,10 +125,10 @@ export const Admin = () => {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="validationDefault03"
+                                id="mobile"
                                 required=""
-                                value={this.data.mobile} 
-                                onChange={handleChange}
+                                value={data.mobile} 
+                                onChange={(e) => handle(e)}
                             />
                         </div>
                     </div>
@@ -146,6 +137,7 @@ export const Admin = () => {
                         <button className="btn btn-primary" type="submit" >
                             Update
                         </button>
+                        <p onClick={checkp()}>clik here</p>
                     </div>
                 </form>
 

@@ -91,7 +91,7 @@ export const LoginWorker = () => {
 
                 </div>
                 <div className="col-12">
-                    <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
+                    <label htmlFor="exampleInputPassword1" className="form-label" >
                         Password
                     </label>
                     <input
