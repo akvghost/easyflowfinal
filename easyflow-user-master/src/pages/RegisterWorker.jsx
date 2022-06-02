@@ -47,7 +47,7 @@ export const RegisterWorker = () => {
             <h2 className="page-header">Register</h2>
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="inputName" className="form-label">
                         Name
                     </label>
@@ -60,7 +60,7 @@ export const RegisterWorker = () => {
 
                     />
                 </div>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="inputMobile" className="form-label">
                         Mobile
                     </label>
@@ -74,7 +74,7 @@ export const RegisterWorker = () => {
                     />
                 </div>
 
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                         Email address
                     </label>
@@ -89,7 +89,7 @@ export const RegisterWorker = () => {
                     />
 
                 </div>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="validationCustom04" className="form-label">
                         Type
                     </label>
@@ -105,7 +105,7 @@ export const RegisterWorker = () => {
 
                     </select>                    
                 </div>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputPassword1" className="form-label">
                         Password
                     </label>

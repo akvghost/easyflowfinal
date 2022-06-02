@@ -77,7 +77,7 @@ export const LoginWorker = () => {
             <h2 className="page-header">Login</h2>
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                         Email address
                     </label>
@@ -90,7 +90,7 @@ export const LoginWorker = () => {
                         value={data.email} />
 
                 </div>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputPassword1" className="form-label" >
                         Password
                     </label>

@@ -80,7 +80,7 @@ export const LoginCompany = () => {
             <h2 className="page-header">Login</h2>
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                         Email address
                     </label>
@@ -93,7 +93,7 @@ export const LoginCompany = () => {
                         value={data.email}
                     />
                 </div>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
                         Password
                     </label>
