@@ -76,7 +76,7 @@ export const LoginCompanyMobile = () => {
             <h2 className="page-header">Login</h2>
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="inputMobile" className="form-label">
                         Mobile
                     </label>
@@ -92,7 +92,7 @@ export const LoginCompanyMobile = () => {
 
                 </div>
 
-                <div className="col-12">
+                <div className="col-4">
                     <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
                         Password
                     </label>

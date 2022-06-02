@@ -1,11 +1,14 @@
-import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 
-export const LoginWorkerMobile = () => {
-    const url = "http://localhost:5000/api/workers/"
+export const LoginAdminMobile = () => {
+
+
+
+    const url = "http://localhost:5000/api/admins/login"
     const [data, setData] = useState({
         mobile: "",
         pass: ""
@@ -65,13 +68,13 @@ export const LoginWorkerMobile = () => {
 
         // alert("login succesful")
         console.log(response.status)
-        window.location.href = "http://localhost:3000/worker"
+        window.location.href = "http://localhost:3000/"
         // }
         // else
         { console.log("in else") }
     }
-    return (
-        <div>
+  return (
+    <div>
             <h2 className="page-header">Login</h2>
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
@@ -117,11 +120,11 @@ export const LoginWorkerMobile = () => {
                         draggable
                         pauseOnHover />
                 </div>
-                <a href="/loginworker">Login with Mail</a>
-                <br />
-                <a href="/registerworker">New Here?</a>
+                <a href="/loginadmin">Login with Mail</a>
+                <br/>
+                <a href="/registeradmin">New Here?</a>
+                
             </form>
         </div>
-
-    )
+  )
 }

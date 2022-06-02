@@ -12,6 +12,9 @@ import RegistrationLogin from '../pages/RegistrationLogin'
 import { Admin } from '../pages/Admin'
 import UpdatePassword from '../pages/UpdatePassword'
 import {UpdateAdminPass} from '../pages/UpdateAdminPass'
+import { LoginAdmin } from '../pages/LoginAdmin'
+import { LoginAdminMobile } from '../pages/LoginAdminMobile'
+import { RegisterAdmin } from '../pages/RegisterAdmin'
 
 const Routes = () => {
     return (
@@ -28,6 +31,9 @@ const Routes = () => {
             <Route path='/admin' component={Admin} />
             <Route path='/updatePassword' component={ UpdatePassword } />
             <Route path='/updateadminpass' component={ UpdateAdminPass } />
+            <Route path='/loginadmin' component={ LoginAdmin } />
+            <Route path='/loginadminmobile' component={ LoginAdminMobile } />
+            <Route path='/registeradmin' component={ RegisterAdmin } />
         </Switch>
     )
 }
