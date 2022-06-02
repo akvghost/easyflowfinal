@@ -29,6 +29,8 @@ import { LoginCompany } from '../pages/LoginCompany'
 import { LoginWorker } from '../pages/LoginWorker'
 import { WorkerViewRequest } from '../pages/WorkerViewRequest'
 import { CompanyViewRequest } from '../pages/CompanyViewRequest'
+import { LoginWorkerMobile } from '../pages/LoginWorkerMobile'
+import { LoginCompanyMobile } from '../pages/LoginCompanyMobile'
 
 
 
@@ -49,6 +51,7 @@ const Routes = () => {
             {/* <Route path='/postForm' component={PostForm}/> */}
             <Route path='/previouscompany' component={PreviousCompany}/>
             <Route path='/workerviewrequest' component={WorkerViewRequest}/>
+            <Route path='/loginworkermobile' component={LoginWorkerMobile}/>
             
 
 
@@ -62,6 +65,7 @@ const Routes = () => {
             <Route path='/registercompany' component={RegisterCompany}/>
             <Route path='/logincompany' component={LoginCompany}/>
             <Route path='/companyviewrequest' component={CompanyViewRequest}/>
+            <Route path='/logincompanymobile' component={LoginCompanyMobile}/>
 
         </Switch>
     )

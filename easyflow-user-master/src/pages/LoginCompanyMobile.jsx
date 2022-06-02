@@ -4,15 +4,15 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const LoginCompany = () => {
+export const LoginCompanyMobile = () => {
     const [response, setResponse] = useState({
         data: "",
         status: ""
 
     })
-    const url = "http://localhost:5000/api/companies/login"
+    const url = "http://localhost:5000/api/companies/"
     const [data, setData] = useState({
-        email: "",
+        mobile: "",
         pass: ""
     })
     function handle(e) {
@@ -23,14 +23,10 @@ export const LoginCompany = () => {
         const newdata = { ...data }
         newdata[e.target.id] = e.target.value
         setData(newdata)
-        // console.log("new")
         console.log(newdata)
-        // console.log("data")
-        // console.log(data)
-
-
 
     }
+
     const submit = async (e) => {
         e.preventDefault();
         try {
@@ -70,7 +66,7 @@ export const LoginCompany = () => {
 
         // alert("login succesful")
         console.log(response.status)
-        window.location.href = "http://localhost:3000/company"
+        window.location.href = "http://localhost:3000/worker"
         // }
         // else
         { console.log("in else") }
@@ -81,18 +77,21 @@ export const LoginCompany = () => {
             <hr className="featurette-divider" />
             <form onSubmit={(e) => submit(e)}>
                 <div className="col-12">
-                    <label htmlFor="exampleInputEmail1" className="form-label">
-                        Email address
+                    <label htmlFor="inputMobile" className="form-label">
+                        Mobile
                     </label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="email"
+                        id="mobile"
                         aria-describedby="emailHelp"
                         onChange={(e) => handle(e)}
-                        value={data.email}
+                        value={data.mobile}
+
                     />
+
                 </div>
+
                 <div className="col-12">
                     <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
                         Password
@@ -106,7 +105,7 @@ export const LoginCompany = () => {
                     />
                 </div>
                 <div className='col-12 my-4' >
-                    <button type="submit" className="btn btn-primary" >
+                    <button type="submit" className="btn btn-primary">
                         Login
                     </button>
                     <ToastContainer
@@ -120,7 +119,7 @@ export const LoginCompany = () => {
                         draggable
                         pauseOnHover />
                 </div>
-                <a href="/logincompanymobile">Login with Mobile</a>
+                <a href="/logincompany">Login with Mail</a>
                 <br />
                 <a href="/registercompany">New Here?</a>
             </form>
