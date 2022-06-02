@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React from 'react'
-import { useState } from 'react'
-
+import { useState , useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Link } from 'react-router-dom'
 const UpdatePassword = () => {
@@ -10,6 +11,11 @@ const UpdatePassword = () => {
           email: "",
           otp: ""
         })
+        const [response , setResponse] = useState({
+          data:"",
+          status:""
+      
+      })
         function handle(e) {
           // e.preventDefault()  ;
           console.log(e.target.value)
@@ -26,10 +32,23 @@ const UpdatePassword = () => {
       
         }
         function sendotp(e) {
-          console.log("iam here");
           e.preventDefault();
           axios.post('http://localhost:5000/api/admins/sendotp', data)
-            .then((response) => console.log(response.data))
+            .then((res) => res)
+            .then((res) => {
+              response.status = res.status
+              if (response.status == "200") {
+                toast("Otp Successfuly Sent", {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+            })
       
         }
         const [verifydata, setVerifydata] = useState({
@@ -49,15 +68,40 @@ const UpdatePassword = () => {
       
       
         }
-        const [otpres, setOtpres] = useState()
         async function verifyotp(e) {
           e.preventDefault();
           verifydata.email = data.email
           console.log(verifydata)
            await axios.post('http://localhost:5000/api/admins/verifyotp', verifydata)
-             .then((response) => setOtpres(response.data))
-             console.log(otpres)
+             .then((res) => res)
+             .then((res) =>{
+              response.status = res.status
+              response.data = res.data
+              if (response.status == "200") {
+                toast(response.data, {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+
+             })
         }
+        function getadminId(){
+          axios.get('http://localhost:5000/api/admins/getadmin')
+              .then((response) => response.data)
+              .then((res) => {
+                  data.email = res.data
+
+              })
+            }
+useEffect(() => {
+  getadminId()
+ })
 
     return (
         <div>
@@ -67,7 +111,7 @@ const UpdatePassword = () => {
       <div className="container">
         <form className="row g-3">
           <div className="col-md-6">
-            <label htmlFor="inputEmail4" className="form-label">
+            <label htmlFor="inputEmail4" className="form-label" >
               Email
             </label>
             <input type="email" className="form-control" id="email" onChange={(e) => handle(e)} value={data.email} />
@@ -90,6 +134,16 @@ const UpdatePassword = () => {
               </button>
             </Link>
           </div>
+          <ToastContainer
+                        position="bottom-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover />
         </form>
       </div>
     </div>
