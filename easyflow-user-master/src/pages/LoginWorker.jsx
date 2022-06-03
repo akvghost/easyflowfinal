@@ -49,18 +49,35 @@ export const LoginWorker = () => {
                             draggable: true,
                             progress: undefined,
                         });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
+                    }
+                    else{
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
 
                 })
         }
-        catch (err) { console.log(err) }
+        catch (err) { console.log(err)
+            toast(err.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        }); }
         console.log(response.status)
-        setTimeout(() => {
-            checkislogin(e)
-        }, 5200)
-
-
-
     }
     function checkislogin(e) {
         e.preventDefault();
@@ -68,6 +85,7 @@ export const LoginWorker = () => {
         // alert("login succesful")
         console.log(response.status)
         window.location.href = "http://localhost:3000/worker"
+        window.history(1)
         // }
         // else
         { console.log("in else") }

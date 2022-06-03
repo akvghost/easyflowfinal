@@ -138,7 +138,7 @@ export const UpdateCompanyPassword = () => {
 
     console.log(response.status)
     window.location.href = "http://localhost:3000/updatecompanypass"
-
+    window.history(1)
 
   }
   useEffect(() => {

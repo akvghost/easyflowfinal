@@ -1,8 +1,16 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const RegisterCompany = () => {
+    const [response, setResponse] = useState({
+        data: "",
+        status: ""
+
+    })
     const url = "http://localhost:5000/api/companies/register"
     const [data, setData] = useState({
         companyName: "",
@@ -25,18 +33,76 @@ export const RegisterCompany = () => {
 
 
     }
-    function submit(e) {
+    const submit = async (e) => {
         e.preventDefault();
         console.log(data)
-        axios.post(url, data)
-            .then(res => {
-                setData(res.data)
-                console.log(data)
-            })
+        try {
+
+            await axios.post(url, data)
+                .then((res) => res)
+                .then((res) => {
+
+                    response.status = res.status
+                    response.data = res.data
+
+                    if (response.status =="201" ) {
+                        toast("Company Registered", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 10400)
+                    }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+
+                })
+        }   
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        console.log(response.status)
+
+
+
+    }
+    function checkislogin(e) {
+        e.preventDefault();
+
+        // alert("login succesful")
+        console.log(response.status)
+        window.location.href = "http://localhost:3000"
+        window.history(1);
+        // }
+        // else
     }
     return (
         <div>
-            <h2 className="page-header">Company</h2>
+            <h2 className="page-header">Register Company</h2>
             <hr className="featurette-divider" />
             <div className='col-6 ' >
                 <div className="card">
@@ -77,7 +143,7 @@ export const RegisterCompany = () => {
                                 <input
                                     type="companymail"
                                     className="form-control"
-                                    id="email"
+                                    id="companymail"
                                     aria-describedby="emailHelp"
                                     onChange={(e) => handle(e)}
                                     value={data.companymail}
@@ -102,9 +168,28 @@ export const RegisterCompany = () => {
                                 <button type="submit" className="btn btn-primary">
                                     Submit
                                 </button>
+                                <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover />
                             </div>
                             <a href="/logincompany">Already Have Account?</a>
-
+                            <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
                         </form>
                     </div>
                 </div>

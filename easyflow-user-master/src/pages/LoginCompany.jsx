@@ -52,15 +52,37 @@ export const LoginCompany = () => {
                             draggable: true,
                             progress: undefined,
                         });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
                     }
-
+                    else{
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        
+                    }
+                    
                 })
         }
-        catch (err) { console.log(err) }
+        catch (err) { console.log(err)
+            toast(err.response.data, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        }); }
         console.log(response.status)
-        setTimeout(() => {
-            checkislogin(e)
-        }, 5200)
+        
 
 
 
@@ -114,20 +136,21 @@ export const LoginCompany = () => {
                                 <button type="submit" className="btn btn-primary" >
                                     Login
                                 </button>
-                                <ToastContainer
-                                    position="bottom-right"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover />
+                                
                             </div>
                             <a href="/logincompanymobile">Login with Mobile</a>
                             <br />
                             <a href="/registercompany">New Here?</a>
+                            <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
                         </form>
                     </div>
                 </div>

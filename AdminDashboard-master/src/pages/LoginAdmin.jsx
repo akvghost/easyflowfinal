@@ -43,7 +43,7 @@ export const LoginAdmin = () => {
                     response.data = res.data
 
                     if ( response.status == "200") {
-                        toast(response.data, {
+                        toast("Login Successful", {
                             position: "bottom-right",
                             autoClose: 5000,
                             hideProgressBar: false,

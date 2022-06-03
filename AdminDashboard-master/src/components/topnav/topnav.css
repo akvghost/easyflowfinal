@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--topnav-height);
+    height: 100px;
 }
 
 .topnav__search {
@@ -37,6 +37,8 @@
 .topnav__right {
     display: flex;
     align-items: center;
+    padding-top: 80px;
+    margin-left: 850px;
 }
 
 .topnav__right-item ~ .topnav__right-item {
@@ -59,7 +61,7 @@
 }
 
 .topnav__right-user {
-    margin-left: 800px;
+    margin-left: 80px;
     display: flex;
     align-items: center;
 }

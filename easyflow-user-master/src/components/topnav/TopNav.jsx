@@ -62,13 +62,13 @@ const Topnav = () => {
     // }, [])
     return (
         <div className='topnav'>
-            <div className="topnav__search">
+            {/* <div className="topnav__search">
                 <input type="text" placeholder='Search here...' />
                 <i className='bx bx-search'></i>
-            </div>
+            </div> */}
             <div className="topnav__right">
                 
-                <div className="topnav__right-item">
+                {/* <div className="topnav__right-item">
                     <Dropdown
                         icon='bx bx-bell'
                         badge=''
@@ -76,8 +76,8 @@ const Topnav = () => {
                         renderItems={(item, index) => renderNotificationItem(item, index)}
                         renderFooter={() => <Link to='/'>View All</Link>}
                     />
-                    {/* dropdown here */}
-                </div>
+                    {/* dropdown here 
+                </div> */}
                 <div className="topnav__right-item">
                     <ThemeMenu/>
                 </div>

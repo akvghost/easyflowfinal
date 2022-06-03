@@ -39,7 +39,15 @@ export const UpdateCompanyPass = (props) => {
 
                     response.status = res.status
                     response.data = res.data
-
+                    toast(response.data, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                     if (response.status == "200") {
                         toast(response.data, {
                             position: "bottom-right",
@@ -125,7 +133,9 @@ export const UpdateCompanyPass = (props) => {
                         <button type="submit" className="btn btn-primary">
                             Update Password
                         </button>
-                        <ToastContainer
+                       
+                    </div>
+                    <ToastContainer
                             position="bottom-right"
                             autoClose={5000}
                             hideProgressBar={false}
@@ -135,7 +145,6 @@ export const UpdateCompanyPass = (props) => {
                             pauseOnFocusLoss
                             draggable
                             pauseOnHover />
-                    </div>
                 </form>
             </div>
         </div>

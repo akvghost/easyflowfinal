@@ -80,14 +80,14 @@ export const Admin = (props) => {
     }
 
     useEffect(() => {
-        setId("this is style")
+        setId("30681EE0-5B27-4755-9181-D9DBDB5A15A7")
     })
 
     return (
         <div>
             <Sidebar {...props} />
 
-            <h2 className="page-header">Profile</h2>
+            <h2 className="page-header">Update Profile</h2>
             <div>
                 <form className="row g-3" onSubmit={(e) => submit(e)}>
                     <div className="col-md-4">

@@ -101,7 +101,7 @@ export const RegisterAdmin = () => {
     return (
         <div>
             <h2 className="page-header">Admin</h2>
-            <hr className="featurette-divider" />
+            {/* <hr className="featurette-divider" /> */}
             <div className='col-6 ' >
                 <div className="card">
                     <div className="card-header"><h4>Register</h4></div>

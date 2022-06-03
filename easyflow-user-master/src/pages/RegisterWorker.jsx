@@ -1,15 +1,22 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const RegisterWorker = () => {
+    const [response, setResponse] = useState({
+        data: "",
+        status: ""
+
+    })
     const url = "http://localhost:5000/api/workers/register"
     const [data, setData] = useState({
-        name: "",
-        mobile: "",
-        email: "",
-        type: "",
-        password: ""
+        workerName: "",
+        workerMobile: "",
+        workerMail: "",
+        workerType: "",
+        workerPass: ""
     })
     function handle(e) {
         // e.preventDefault()  ;
@@ -26,21 +33,72 @@ export const RegisterWorker = () => {
 
 
     }
-    function submit(e) {
+    const submit = async (e) => {
         e.preventDefault();
         console.log(data)
-        axios.post(url, {
-            workerName: data.name,
-            workerMobile: data.mobile,
-            workerMail: data.email,
-            workerType: data.type,
-            workerpass: data.password,
-            ratings: 0
-        })
-            .then(res => {
-                setData(res.data)
-                console.log(data)
-            })
+        try {
+
+            await axios.post(url, data)
+                .then((res) => res)
+                .then((res) => {
+
+                    response.status = res.status
+                    response.data = res.data
+
+                    if (response.status =="201" ) {
+                        toast("Worker Registerd", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
+                    }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+
+                })
+        }   
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        console.log(response.status)
+
+
+
+    }
+    function checkislogin(e) {
+        e.preventDefault();
+
+        // alert("login succesful")
+        console.log(response.status)
+        window.location.href = "http://localhost:3000"
+        window.history(1);
+        // }
+        // else
     }
     return (
         <div>
@@ -48,7 +106,7 @@ export const RegisterWorker = () => {
             <hr className="featurette-divider" />
             <div className='col-6 ' >
                 <div className="card">
-                    <div className="card-header"><h4>Register</h4></div>
+                    <div className="card-header"><h4>Register Worker</h4></div>
                     <div className="card-body">
                         <form onSubmit={(e) => submit(e)}>
                             <div className="col-10">
@@ -58,9 +116,9 @@ export const RegisterWorker = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="name"
+                                    id="workerName"
                                     onChange={(e) => handle(e)}
-                                    value={data.name}
+                                    value={data.workerName}
 
                                 />
                             </div>
@@ -71,9 +129,9 @@ export const RegisterWorker = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="mobile"
+                                    id="workerMobile"
                                     onChange={(e) => handle(e)}
-                                    value={data.mobile}
+                                    value={data.workerMobile}
 
                                 />
                             </div>
@@ -85,10 +143,10 @@ export const RegisterWorker = () => {
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="email"
+                                    id="workerMail"
                                     aria-describedby="emailHelp"
                                     onChange={(e) => handle(e)}
-                                    value={data.email}
+                                    value={data.workerMail}
 
                                 />
 
@@ -97,7 +155,7 @@ export const RegisterWorker = () => {
                                 <label htmlFor="validationCustom04" className="form-label">
                                     Type
                                 </label>
-                                <select className="form-select" id="type" required="" onChange={(e) => handle(e)} value={data.type}>
+                                <select className="form-select" id="workerType" required="" onChange={(e) => handle(e)} value={data.workerType}>
                                     <option selected="" disabled="" >
                                         Choose...
                                     </option>
@@ -116,15 +174,25 @@ export const RegisterWorker = () => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="password"
+                                    id="workerPass"
                                     onChange={(e) => handle(e)}
-                                    value={data.password}
+                                    value={data.workerPass}
                                 />
                             </div>
                             <div className='col-12 my-4' >
                                 <button type="submit" className="btn btn-primary">
                                     Submit
                                 </button>
+                                <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover />
                             </div>
                             <a href="/loginworker">Already Have Account?</a>
                         </form>

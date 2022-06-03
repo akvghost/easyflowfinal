@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 export const UpdateWorkerPass = (props) => {
-    const url = "http://localhost:5000/api/companies/updatecompanypass"
+    const url = "http://localhost:5000/api/workers/updateworkerpass"
     const [data, setData] = useState({
         password: "",
         confirmpassword: ""
@@ -50,9 +50,7 @@ export const UpdateWorkerPass = (props) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        setTimeout(() => {
-                            checkislogin(e)
-                        }, 5200)
+                        
                     }
                     else {
                         console.log(response.data)
@@ -123,7 +121,11 @@ export const UpdateWorkerPass = (props) => {
                         <button type="submit" className="btn btn-primary">
                             Update Password
                         </button>
-                        <ToastContainer
+                        
+                    </div>
+                    
+                </form>
+                <ToastContainer
                             position="bottom-right"
                             autoClose={5000}
                             hideProgressBar={false}
@@ -133,8 +135,6 @@ export const UpdateWorkerPass = (props) => {
                             pauseOnFocusLoss
                             draggable
                             pauseOnHover />
-                    </div>
-                </form>
             </div>
         </div>
     )

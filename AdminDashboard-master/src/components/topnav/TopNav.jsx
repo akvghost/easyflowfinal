@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 
 import './topnav.css'
@@ -38,7 +38,7 @@ const renderUserToggle = (user) => (
     </div>
 )
 
-const renderUserMenu =(item, index) => (
+const renderUserMenu = (item, index) => (
     <Link to='/settings' key={index}>
         <div className="notification-item">
             <i className={item.icon}></i>
@@ -50,7 +50,7 @@ const renderUserMenu =(item, index) => (
 
 const Topnav = () => {
     const [notificationList, setNotificationList] = useState([])
-    function getNotification(){
+    function getNotification() {
         //add here notification app path
         axios.get('')
             .then((response) => response.data)
@@ -69,15 +69,15 @@ const Topnav = () => {
             </div> */}
             <div className="topnav__right">
                 <div className="topnav__right-item">
-                    {/* dropdown here */}
+                    { /* {/* dropdown here }
                     
                     <Dropdown
                         customToggle={() => renderUserToggle(curr_user)}
                         contentData={user_menu}
                         renderItems={(item, index) => renderUserMenu(item, index)}
                     />
-                </div>
-                <div className="topnav__right-item">
+                </div> */}
+                    {/* <div className="topnav__right-item">
                     <Dropdown
                         icon='bx bx-bell'
                         badge=''
@@ -85,10 +85,11 @@ const Topnav = () => {
                         renderItems={(item, index) => renderNotificationItem(item, index)}
                         renderFooter={() => <Link to='/'>View All</Link>}
                     />
-                    {/* dropdown here */}
-                </div>
-                <div className="topnav__right-item">
-                    <ThemeMenu/>
+                    {/* dropdown here }
+                </div> */}
+                    <div className="topnav__right-item">
+                        <ThemeMenu />
+                    </div>
                 </div>
             </div>
         </div>

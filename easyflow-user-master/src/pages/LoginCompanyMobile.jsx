@@ -1,16 +1,17 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginCompanyMobile = () => {
+    const isLogin = false
     const [response, setResponse] = useState({
         data: "",
         status: ""
 
     })
-    const url = "http://localhost:5000/api/companies/"
+    const url = "http://localhost:5000/api/companies/login"
     const [data, setData] = useState({
         mobile: "",
         pass: ""
@@ -48,15 +49,37 @@ export const LoginCompanyMobile = () => {
                             draggable: true,
                             progress: undefined,
                         });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
+                    }
+                    else{
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        }); 
+                        console.log(response.status)
+                       
                     }
 
                 })
         }
-        catch (err) { console.log(err) }
-        console.log(response.status)
-        setTimeout(() => {
-            checkislogin(e)
-        }, 5200)
+        catch (err) { console.log(err) 
+            toast(err.response.data, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });}
+        
 
 
 
@@ -66,13 +89,14 @@ export const LoginCompanyMobile = () => {
 
         // alert("login succesful")
         console.log(response.status)
-        window.location.href = "http://localhost:3000/worker"
-        // }
-        // else
-        { console.log("in else") }
+        
+        window.location.href = "http://localhost:3000/company"
+        window.history(1)
     }
+    
+
     return (
-        <div>
+        <div >
             <h2 className="page-header">Company</h2>
             <hr className="featurette-divider" />
             <div className='col-6 ' >

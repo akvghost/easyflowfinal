@@ -12,11 +12,12 @@ export const UpdateWorkerProfile = (props) => {
     })
    
     const [data, setData] = useState({
-        name: "",
-        mobile: "",
-        email: "",
-        aadhaar:"",
-        type:""
+        workerName: "",
+        workerMobile: "",
+        workerMail: "",
+        workerAadhar:"",
+        workerType:"",
+        LocationPrefrence:""
     })
     function handle(e) {
 
@@ -26,6 +27,19 @@ export const UpdateWorkerProfile = (props) => {
 
 
 
+    }
+    function show(e)
+    {
+      e.preventDefault()
+      toast("Updated Successfully", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
     }
     const submit = async (e) => {
         e.preventDefault();
@@ -93,36 +107,36 @@ export const UpdateWorkerProfile = (props) => {
             <label htmlFor="validationCustom01" className="form-label">
               Name
             </label>
-            <input type="text" className="form-control" name="name"  id="name" required="" value={data.name}
+            <input type="text" className="form-control" name="name"  id="workerName" required="" value={data.workerName}
                             onChange={(e) => handle(e)}/>
           </div>
           <div className="col-md-6">
             <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" className="form-control" name="email" id="email" required="" value={data.email}
-                            onChange={(e) => handle(e)}/>
+            <input type="email" className="form-control" name="email" id="workerMail" required="" onChange={(e) => handle(e)} value={data.workerMail}
+                            />
           </div>
 
           <div className="col-md-4">
             <label htmlFor="inputCity" className="form-label">
               Mobile
             </label>
-            <input type="text" className="form-control" name="mobile"  id="mobile" value={data.mobile}
+            <input type="text" className="form-control" name="mobile"  id="workerMobile" value={data.workerMobile}
                             onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputZip" className="form-label">
               Aadhaar
             </label>
-            <input type="text" className="form-control" name="aadhar"  id="aadhaar" value={data.aadhaar}
+            <input type="text" className="form-control" name="aadhar"  id="workerAadhar" value={data.workerAadhar}
                             onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputState" className="form-label">
               Work Type
             </label>
-            <select id="type" name="workType"  className="form-select" value={data.Name}
+            <select id="workerType" name="workType"  className="form-select" value={data.workerType}
                             onChange={(e) => handle(e)}>
             <option selected="">Select</option>
               <option>Carpenter</option>
@@ -136,6 +150,16 @@ export const UpdateWorkerProfile = (props) => {
             <button type="submit" className="btn btn-primary">
               Update
             </button>
+            <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover />
           </div>
         </form>
 

@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export const UpdateCompanyProfile = (props) => {
  
-  const url = "http://localhost:5000/api/workers/updateworker"
+  const url = "http://localhost:5000/api/companies/updatecompany"
     const [response, setResponse] = useState({
         data: "",
         status: ""
@@ -12,11 +12,11 @@ export const UpdateCompanyProfile = (props) => {
     })
    
     const [data, setData] = useState({
-        name: "",
-        mobile: "",
-        email: "",
-        cin:"",
-        gstin:""
+      CompanyName: "",
+        CompanyMobile: "",
+        CompanyMail: "",
+        CompanyCin:"",
+        CompanyGstin:""
     })
     function handle(e) {
 
@@ -93,14 +93,14 @@ export const UpdateCompanyProfile = (props) => {
             <label htmlFor="inputEmail4" className="form-label">
               Name
             </label>
-            <input type="email" name="name"  className="form-control" id="name" value={data.name}
+            <input type="text" name="name"  className="form-control" id="CompanyName" value={data.CompanyName}
                             onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-6">
             <label htmlFor="inputPassword4" className="form-label">
               Email
             </label>
-            <input type="email" name="email"  className="form-control" id="email" value={data.email}
+            <input type="email" name="email"  className="form-control" id="CompanyMail" value={data.CompanyMail}
                             onChange={(e) => handle(e)}/>
           </div>
 
@@ -108,21 +108,21 @@ export const UpdateCompanyProfile = (props) => {
             <label htmlFor="inputCity" className="form-label">
               Mobile
             </label>
-            <input type="text" name="mobile" className="form-control" id="mobile" value={data.mobile}
+            <input type="text" name="mobile" className="form-control" id="CompanyMobile" value={data.CompanyMobile}
                             onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputZip" className="form-label">
               CIN
             </label>
-            <input type="text" name="cin" className="form-control" id="cin" value={data.cin}
+            <input type="text" name="cin" className="form-control" id="CompanyCin" value={data.CompanyCin}
                             onChange={(e) => handle(e)}/>
           </div>
           <div className="col-md-4">
             <label htmlFor="inputZip" className="form-label">
               GSTIN
             </label>
-            <input type="text" name="gstin" className="form-control" id="gstin" value={data.gstin}
+            <input type="text" name="gstin" className="form-control" id="CompanyGstin" value={data.CompanyGstin}
                             onChange={(e) => handle(e)} />
           </div>
           
@@ -131,7 +131,18 @@ export const UpdateCompanyProfile = (props) => {
               Update
             </button>
           </div>
+          
         </form>
+        <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
       </div>
     </div>
   )

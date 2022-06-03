@@ -47,15 +47,27 @@ export const LoginWorkerMobile = () => {
                             draggable: true,
                             progress: undefined,
                         });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
+                    }
+                    else{
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
 
                 })
         }
         catch (err) { console.log(err) }
         console.log(response.status)
-        setTimeout(() => {
-            checkislogin(e)
-        }, 5200)
+        
 
 
 
