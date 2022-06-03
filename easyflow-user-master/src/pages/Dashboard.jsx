@@ -107,7 +107,7 @@ const Dashboard = () => {
                                         <p className="card-text mb-auto">
                                             Register and get opportunities to work in your desired location.
                                         </p>
-                                        <a href="/worker" className="stretched-link" >
+                                        <a href="/loginworker" className="stretched-link" >
                                             Explore More
                                         </a>
                                     </div>
@@ -127,7 +127,7 @@ const Dashboard = () => {
                                         <p className="mb-auto">
                                             Register and find work in favourable domain and location.
                                         </p>
-                                        <a href="/worker" className="stretched-link">
+                                        <a href="/loginworker" className="stretched-link">
                                             Explore More
                                         </a>
                                     </div>
@@ -148,7 +148,7 @@ const Dashboard = () => {
                                             Register and get hire local workers from your work site.
                                         
                                         </p>
-                                        <a href="/company" className="stretched-link">
+                                        <a href="/logincompany" className="stretched-link">
                                             Explore More
                                         </a>
                                     </div>
@@ -168,7 +168,7 @@ const Dashboard = () => {
                                         <p className="mb-auto">
                                             Register and find workers in favourable domain and location.
                                         </p>
-                                        <a href="/company" className="stretched-link">
+                                        <a href="/logincompany" className="stretched-link">
                                             Explore More
                                         </a>
                                     </div>
