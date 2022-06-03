@@ -4,6 +4,7 @@ import Table from '../components/table/Table'
 import '../components/topnav/topnav.css'
 //import workerList from '../assets/JsonData/workers-list.json'
 import axios from 'axios'
+import Sidebar from '../components/sidebar/Sidebar'
 
 const workerTableHead = [
     'serial',
@@ -28,7 +29,7 @@ const renderBody = (item, index) => (
         <td>{item.ratings}</td>
     </tr>
 )
-const Workers = () => {
+const Workers = (props) => {
     const [ workerList, setWorkerList ] = useState([])
     function getWorker(){
         axios.get('http://localhost:5000/api/workers')
@@ -46,6 +47,7 @@ const Workers = () => {
     }, [])
     return (
         <div>
+            <Sidebar {...props}/>
             <h2 className="page-header">
                 workers
                 <div className="topnav__search">

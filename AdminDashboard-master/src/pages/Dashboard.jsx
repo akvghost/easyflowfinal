@@ -14,6 +14,7 @@ import Table from '../components/table/Table'
 import Badge from '../components/badge/Badge'
 
 import statusCards from '../assets/JsonData/status-card-data.json'
+import Sidebar from '../components/sidebar/Sidebar'
 
 const chartOptions = {
     series: [{
@@ -161,7 +162,7 @@ const renderRequestBody = (item, index) => (
     </tr>
 )
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     
         const [count, setCount] = useState([])
     const [companyRequestList, setCompanyRequestList] = useState([])
@@ -189,6 +190,7 @@ const Dashboard = () => {
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
     return (
         <div>
+            <Sidebar {...props}/>
             <h2 className="page-header">Dashboard</h2>
             <div className="row">
                 <div className="col-6">

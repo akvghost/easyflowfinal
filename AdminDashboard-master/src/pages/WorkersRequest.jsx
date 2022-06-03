@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Sidebar from '../components/sidebar/Sidebar'
 
 import Table from '../components/table/Table'
 //import workerList from '../assets/JsonData/workers-list.json'
@@ -26,7 +27,7 @@ const renderBody = (item, index) => (
     </tr>
 )
 
-const WorkersRequest = () => {
+const WorkersRequest = (props) => {
     const [workersRequestList, setWorkerRequestList] = useState([])
     function getWorkerRequestList(){
         axios.get('http://localhost:5000/api/admins/totalrequests/workers')
@@ -42,6 +43,8 @@ const WorkersRequest = () => {
     }, [])
     return (    
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">
                 workers
                 <div className="topnav__search">

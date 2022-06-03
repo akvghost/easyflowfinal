@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from '../components/sidebar/Sidebar';
 
 export const LoginAdmin = () => {
     const url = "http://localhost:5000/api/admins/login"
@@ -27,10 +28,12 @@ export const LoginAdmin = () => {
 
 
     }
+    
 
     const submit = async (e) => {
         e.preventDefault();
         try {
+            
             await axios.post(url, data)
                 .then((res) => res)
                 .then((res) => {
@@ -49,6 +52,7 @@ export const LoginAdmin = () => {
                             draggable: true,
                             progress: undefined,
                         });
+                       
                     }
 
                 })
@@ -59,7 +63,7 @@ export const LoginAdmin = () => {
             checkislogin(e)
         }, 5200)
 
-
+        return (<p>asdfasfsd</p>)
 
     }
     function checkislogin(e) {

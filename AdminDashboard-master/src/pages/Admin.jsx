@@ -2,7 +2,9 @@ import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-    export const Admin = () => {
+import Sidebar from '../components/sidebar/Sidebar'
+
+    export const Admin = (props) => {
     const url = "http://localhost:5000/api/admins/p"
     const [response, setResponse] = useState({
         data: "",
@@ -60,6 +62,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
     return (
         <div>
+            <Sidebar {...props}/>
+
             <h2 className="page-header">Profile</h2>
             <div>
                 <form className="row g-3" onSubmit={(e) => submit(e)}>

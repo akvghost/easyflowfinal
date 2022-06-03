@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
+import Sidebar from '../components/sidebar/Sidebar'
 
 const latestRequest = {
     header: [
@@ -79,7 +80,7 @@ const renderWorkerRequestBody = (item, index) => (
         <td>{item.location}</td>
     </tr>
 )
-export const Requests = () => {
+export const Requests = (props) => {
     const [response , setResponse] = useState({
         data:"",
         status:""
@@ -171,6 +172,8 @@ export const Requests = () => {
     }, [])
     return (
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">Requests</h2>
             <div className="row">
                 <div className="col-6">

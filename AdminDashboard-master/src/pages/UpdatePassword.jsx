@@ -3,9 +3,10 @@ import React from 'react'
 import { useState , useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from '../components/sidebar/Sidebar'
 
 import { Link } from 'react-router-dom'
-const UpdatePassword = () => {
+const UpdatePassword = (props) => {
   
         const [data, setData] = useState({
           email: "",
@@ -105,6 +106,8 @@ useEffect(() => {
 
     return (
         <div>
+                      <Sidebar {...props}/>
+
       <h2 className="page-header">Admin</h2>
       <hr className="featurette-divider" />
       <h4 className="page-header">Update Profile</h4>

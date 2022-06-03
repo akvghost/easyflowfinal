@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Table from '../components/table/Table'
+import Sidebar from '../components/sidebar/Sidebar'
 
 //import workerList from '../assets/JsonData/workers-list.json'
 import axios from 'axios'
@@ -34,7 +35,7 @@ const renderBody = (item, index) => (
     </tr>
 )
 
-const CompanyRequest = () => {
+const CompanyRequest = (props) => {
     const [companyRequestList, setCompanyRequestList] = useState([])
     function getCompanyRequest(){
         axios.get('http://localhost:5000/api/admins/totalrequests/companies')
@@ -50,6 +51,8 @@ const CompanyRequest = () => {
     }, [])
     return (
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">
                 companies requests
                 <div className="topnav__search">

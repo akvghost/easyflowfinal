@@ -2,9 +2,13 @@ import React from 'react'
 import settingsCards from '../assets/JsonData/settings-card-data.json'
 import SettingstCard from '../components/settings-card/SettingsCard'
 import { Link } from 'react-router-dom'
-export const Settings = () => {
+import Sidebar from '../components/sidebar/Sidebar'
+
+export const Settings = (props) => {
     return (
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">Settings</h2>
             <div className="row">
                 <div className="col-6">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../components/table/Table'
 import '../components/topnav/topnav.css'
+import Sidebar from '../components/sidebar/Sidebar'
 
 //import companyList from '../assets/JsonData/company-list.json'
 import axios from 'axios'
@@ -29,7 +30,7 @@ const renderBody = (item, index) => (
 )
 
 
-const Companies = () => {
+const Companies = (props) => {
     const [companyList, setCompanyList] = useState([])
     function getCompany(){
         console.log("iam here");
@@ -51,6 +52,8 @@ const Companies = () => {
     }, [])
     return (
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">
                 companies
                 <div className="topnav__search">

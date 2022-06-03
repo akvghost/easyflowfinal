@@ -8,7 +8,7 @@ import WorkersRequest from '../pages/WorkersRequest'
 import CompanyRequest from '../pages/CompanyRequest'
 import { Analytics } from '../pages/Analytics'
 import { Settings } from '../pages/Settings'
-import RegistrationLogin from '../pages/RegistrationLogin'
+// import RegistrationLogin from '../pages/RegistrationLogin'
 import { Admin } from '../pages/Admin'
 import UpdatePassword from '../pages/UpdatePassword'
 import {UpdateAdminPass} from '../pages/UpdateAdminPass'
@@ -19,7 +19,9 @@ import { RegisterAdmin } from '../pages/RegisterAdmin'
 const Routes = () => {
     return (
         <Switch>
-            <Route path='/' exact component={Dashboard} />
+            <Route path='/' exact component={LoginAdmin} />
+            <Route path='/dashboard' exact component={Dashboard} />
+
             <Route path='/workers' component={Workers} />
             <Route path='/companies' component={Companies} />
             <Route path='/requests' component={Requests} />
@@ -27,7 +29,7 @@ const Routes = () => {
             <Route path='/companyrequest' component={CompanyRequest} />
             <Route path='/analytics' component={Analytics} />
             <Route path='/settings' component={Settings} />
-            <Route path='/registrationlogin' component={RegistrationLogin} />
+            {/* <Route path='/registrationlogin' component={RegistrationLogin} /> */}
             <Route path='/admin' component={Admin} />
             <Route path='/updatePassword' component={ UpdatePassword } />
             <Route path='/updateadminpass' component={ UpdateAdminPass } />

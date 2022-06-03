@@ -1,8 +1,11 @@
 import React from 'react'
+import Sidebar from '../components/sidebar/Sidebar'
 
-export const UpdateAdminPass = () => {
+export const UpdateAdminPass = (props) => {
   return (
     <div>
+     <Sidebar {...props}/>
+
       <h2 className="page-header">Admin</h2>
       <hr className="featurette-divider" />
       <h4 className="page-header">Update Password</h4>

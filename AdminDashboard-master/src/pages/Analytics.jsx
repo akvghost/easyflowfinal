@@ -1,6 +1,7 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
 import { useSelector } from 'react-redux'
+import Sidebar from '../components/sidebar/Sidebar'
 
 
 
@@ -139,10 +140,12 @@ const radialChart = {
         labels: ['Requested', 'Hired', 'Registered'],
     },
 }
-export const Analytics = () => {
+export const Analytics = (props) => {
     const themeReducer = useSelector(state => state.ThemeReducer.mode)
     return (
         <div>
+                        <Sidebar {...props}/>
+
             <h2 className="page-header">Requests</h2>
             <div className="row">
                 <div className="col-8">
