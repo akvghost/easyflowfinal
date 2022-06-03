@@ -73,56 +73,63 @@ export const LoginCompanyMobile = () => {
     }
     return (
         <div>
-            <h2 className="page-header">Login</h2>
+            <h2 className="page-header">Company</h2>
             <hr className="featurette-divider" />
-            <form onSubmit={(e) => submit(e)}>
-                <div className="col-4">
-                    <label htmlFor="inputMobile" className="form-label">
-                        Mobile
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="mobile"
-                        aria-describedby="emailHelp"
-                        onChange={(e) => handle(e)}
-                        value={data.mobile}
+            <div className='col-6 ' >
+                <div className="card">
+                    <div className="card-header"><h4>Login</h4></div>
+                    <div className="card-body">
+                        <form onSubmit={(e) => submit(e)}>
+                            <div className="col-10">
+                                <label htmlFor="inputMobile" className="form-label">
+                                    Mobile
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="mobile"
+                                    aria-describedby="emailHelp"
+                                    onChange={(e) => handle(e)}
+                                    value={data.mobile}
 
-                    />
+                                />
 
-                </div>
+                            </div>
 
-                <div className="col-4">
-                    <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="pass"
-                        onChange={(e) => handle(e)}
-                        value={data.pass}
-                    />
+                            <div className="col-10">
+                                <label htmlFor="exampleInputPassword1" className="form-label" onClick={checkislogin}>
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="pass"
+                                    onChange={(e) => handle(e)}
+                                    value={data.pass}
+                                />
+                            </div>
+                            <div className='col-12 my-4' >
+                                <button type="submit" className="btn btn-primary">
+                                    Login
+                                </button>
+                                <ToastContainer
+                                    position="bottom-right"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover />
+                            </div>
+                            <a href="/logincompany">Login with Mail</a>
+                            <br />
+                            <a href="/registercompany">New Here?</a>
+                        </form>
+                    </div>
                 </div>
-                <div className='col-12 my-4' >
-                    <button type="submit" className="btn btn-primary">
-                        Login
-                    </button>
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover />
-                </div>
-                <a href="/logincompany">Login with Mail</a>
-                <br />
-                <a href="/registercompany">New Here?</a>
-            </form>
+            </div>
         </div>
     )
 }

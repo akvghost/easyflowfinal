@@ -74,53 +74,60 @@ export const LoginWorker = () => {
     }
     return (
         <div>
-            <h2 className="page-header">Login</h2>
+            <h2 className="page-header">Worker</h2>
             <hr className="featurette-divider" />
-            <form onSubmit={(e) => submit(e)}>
-                <div className="col-4">
-                    <label htmlFor="exampleInputEmail1" className="form-label">
-                        Email address
-                    </label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        aria-describedby="emailHelp"
-                        onChange={(e) => handle(e)}
-                        value={data.email} />
+            <div className='col-6 ' >
+                <div className="card">
+                    <div className="card-header"><h4>Login</h4></div>
+                    <div className="card-body">
+                        <form onSubmit={(e) => submit(e)}>
+                            <div className="col-10">
+                                <label htmlFor="exampleInputEmail1" className="form-label">
+                                    Email address
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    aria-describedby="emailHelp"
+                                    onChange={(e) => handle(e)}
+                                    value={data.email} />
 
+                            </div>
+                            <div className="col-10">
+                                <label htmlFor="exampleInputPassword1" className="form-label" >
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="pass"
+                                    onChange={(e) => handle(e)}
+                                    value={data.pass}
+                                />
+                            </div>
+                            <div className='col-12 my-4' >
+                                <button type="submit" className="btn btn-primary">
+                                    Login
+                                </button>
+                                <ToastContainer
+                                    position="bottom-right"
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover />
+                            </div>
+                            <a href="/loginworkermobile">Login with Mobile</a>
+                            <br />
+                            <a href="/registerworker">New Here?</a>
+                        </form>
+                    </div>
                 </div>
-                <div className="col-4">
-                    <label htmlFor="exampleInputPassword1" className="form-label" >
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="pass"
-                        onChange={(e) => handle(e)}
-                        value={data.pass}
-                    />
-                </div>
-                <div className='col-12 my-4' >
-                    <button type="submit" className="btn btn-primary">
-                        Login
-                    </button>
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover />
-                </div>
-                <a href="/loginworkermobile">Login with Mobile</a>
-                <br />
-                <a href="/registerworker">New Here?</a>
-            </form>
+            </div>
         </div>
 
     )
