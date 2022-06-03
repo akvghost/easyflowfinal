@@ -1,117 +1,129 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// add the path below where you want to update worker
-const url = ""
-export const UpdateWorkerProfile = (props) => {
-  props.state = {
-    name: '',
-    email: '',
-    mobile: '',
-    aadhar: '',
-    workType: '',
-  }
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-  const handleChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
-    this.setState({
-      [name]: value
-  })
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if(this.state.id){
-      updateRecord()
-    }else{
-      console.log("No Record found!")
+export const UpdateWorkerProfile = (props) => {
+  const url = "http://localhost:5000/api/workers/updateworker"
+    const [response, setResponse] = useState({
+        data: "",
+        status: ""
+
+    })
+   
+    const [data, setData] = useState({
+        name: "",
+        mobile: "",
+        email: "",
+        aadhaar:"",
+        type:""
+    })
+    function handle(e) {
+
+        const newdata = { ...data }
+        newdata[e.target.id] = e.target.value
+        setData(newdata)
+
+
+
     }
-  }
-  const getCompanyId = () => {
-    const { id } = this.state
-        const comapnyId = url + id
-        console.log(comapnyId)
-        axios.get(comapnyId)
-            .then((res) => res.json())
-            .then((results) => {
-                if(results){
-                    this.setState({
-                      name: results.name,
-                      email: results.email,
-                      mobile: results.mobile,
-                      aadhar: results.aadhar,
-                      workType: results.workType,
-                    });
-                }else{
-                    alert("No Record Fount!")
-                }
-            }
-            )
-  }
-  const updateRecord = () => {
-    let head = {
-      id: this.state.id,
-      name: this.state.name,
-      email: this.state.email,
-      mobile: this.state.mobile,
-      aadhar: this.state.aadhar,
-      workType: this.state.workType,
-  }
-  const baseUrl = url + this.state.id
-  console.log(baseUrl)
-  axios.post(baseUrl, head)
-      .then((res) => {
-          return res.json()
-      })
-      .then((results) => {
-          if(results){
-              alert("company Updated Successfully!")
-          }
-      })
-      .catch((error) => {
-          alert("Can not update company, there is an error")
-          console.log(error)
-      })
-  }
-  useEffect(() => {
-    getCompanyId()
-  })
+    const submit = async (e) => {
+        e.preventDefault();
+        console.log(data)
+        try {
+            await axios.post(url, data)
+                .then((res) => res)
+                .then((res) => {
+
+                    response.status = res.status
+                    response.data = res.data
+                    console.log(response.data)
+                    console.log(response.status)
+                    if (response.status == "204" || response.status == "200") {
+                        toast("Updated Successfully", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+
+
+                })
+        }
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
+    }
+
+
+
   return (
     <div>
       <h2 className="page-header">Worker</h2>
       <hr className="featurette-divider" />
       <h4 className="page-header">Update Profile</h4>
       <div className="container">
-        <form className="row g-3" onSubmit={handleSubmit}>
+        <form className="row g-3"onSubmit={(e) => submit(e)} >
           <div className="col-md-6">
             <label htmlFor="validationCustom01" className="form-label">
               Name
             </label>
-            <input type="text" className="form-control" name="name" value={this.state.name} onChange={handleChange} id="validationCustom01" required="" />
+            <input type="text" className="form-control" name="name"  id="name" required="" value={data.name}
+                            onChange={(e) => handle(e)}/>
           </div>
           <div className="col-md-6">
             <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" className="form-control" name="email" value={this.state.email} onChange={handleChange} id="inputEmail4" required=""/>
+            <input type="email" className="form-control" name="email" id="email" required="" value={data.email}
+                            onChange={(e) => handle(e)}/>
           </div>
 
           <div className="col-md-4">
             <label htmlFor="inputCity" className="form-label">
               Mobile
             </label>
-            <input type="text" className="form-control" name="mobile" value={this.state.mobile} onChange={handleChange} id="inputCity" />
+            <input type="text" className="form-control" name="mobile"  id="mobile" value={data.mobile}
+                            onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputZip" className="form-label">
               Aadhaar
             </label>
-            <input type="text" className="form-control" name="aadhar" value={this.state.aadhar} onChange={handleChange} id="inputZip" />
+            <input type="text" className="form-control" name="aadhar"  id="aadhaar" value={data.aadhaar}
+                            onChange={(e) => handle(e)} />
           </div>
           <div className="col-md-4">
             <label htmlFor="inputState" className="form-label">
               Work Type
             </label>
-            <select id="inputState" name="workType" value={this.state.workType} onChange={handleChange} className="form-select">
+            <select id="type" name="workType"  className="form-select" value={data.Name}
+                            onChange={(e) => handle(e)}>
             <option selected="">Select</option>
               <option>Carpenter</option>
               <option>Labour</option>

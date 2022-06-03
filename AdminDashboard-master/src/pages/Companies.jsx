@@ -7,7 +7,7 @@ import Sidebar from '../components/sidebar/Sidebar'
 import axios from 'axios'
 
 const companyTableHead = [
-    
+
     'name',
     'email',
     'phone',
@@ -32,36 +32,32 @@ const renderBody = (item, index) => (
 
 const Companies = (props) => {
     const [companyList, setCompanyList] = useState([])
-    function getCompany(){
+    function getCompany() {
         console.log("iam here");
-        
+
         axios.get('http://localhost:5000/api/companies')
             .then((response) => response.data)
             .then((data) => {
                 setCompanyList(data)
                 console.log(setCompanyList)
-                
+
             })
     }
-    
+
     useEffect(() => {
         debugger
         console.log("here iam ")
-        
+
         getCompany()
     }, [])
     return (
         <div>
-                        <Sidebar {...props}/>
+            <Sidebar {...props} />
 
             <h2 className="page-header">
                 companies
-                <div className="topnav__search">
-                    <input type="text" placeholder='Search here...' />
-                    <i className='bx bx-search'></i>
-                </div>
             </h2>
-            
+
             <div className="row">
                 <div className="col-12">
                     <div className="card">

@@ -21,13 +21,13 @@ const renderBody = (item, index) => (
     <tr key={index}>
         <td>{item.serial}</td>
         <td>{item.companyName}</td>
-        <td>{item.companyMail   }</td>
+        <td>{item.companyMail}</td>
         <td>{item.companyMobile}</td>
         <td>{item.workerType}</td>
         <td>{item.vacancy}</td>
         <td>{item.location}</td>
-        
-        
+
+
 
 
 
@@ -37,28 +37,25 @@ const renderBody = (item, index) => (
 
 const CompanyRequest = (props) => {
     const [companyRequestList, setCompanyRequestList] = useState([])
-    function getCompanyRequest(){
+    function getCompanyRequest() {
         axios.get('http://localhost:5000/api/admins/totalrequests/companies')
             .then((response) => response.data)
             .then((data) => {
                 setCompanyRequestList(data)
-                
+
 
             })
-    }console.log(companyRequestList)
+    } console.log(companyRequestList)
     useEffect(() => {
         getCompanyRequest()
     }, [])
     return (
         <div>
-                        <Sidebar {...props}/>
+            <Sidebar {...props} />
 
             <h2 className="page-header">
                 companies requests
-                <div className="topnav__search">
-                    <input type="text" placeholder='Search here...' />
-                    <i className='bx bx-search'></i>
-                </div>
+
             </h2>
             <div className="row">
                 <div className="col-12">

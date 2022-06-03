@@ -29,35 +29,32 @@ const renderBody = (item, index) => (
 
 const WorkersRequest = (props) => {
     const [workersRequestList, setWorkerRequestList] = useState([])
-    function getWorkerRequestList(){
+    function getWorkerRequestList() {
         axios.get('http://localhost:5000/api/admins/totalrequests/workers')
             .then((response) => response.data)
             .then((data) => {
                 setWorkerRequestList(data)
-                
+
 
             })
-    }console.log(workersRequestList)
+    } console.log(workersRequestList)
     useEffect(() => {
         getWorkerRequestList()
     }, [])
-    return (    
+    return (
         <div>
-                        <Sidebar {...props}/>
+            <Sidebar {...props} />
 
             <h2 className="page-header">
                 workers
-                <div className="topnav__search">
-                    <input type="text" placeholder='Search here...' />
-                    <i className='bx bx-search'></i>
-                </div>
+
             </h2>
             <div className="row">
                 <div className="col-12">
                     <div className="card">
                         <div className="card__body">
                             <Table
-                                limit={workersRequestList.length-1}
+                                limit={workersRequestList.length - 1}
                                 headData={workerTableHead}
                                 renderHead={(item, index) => renderHead(item, index)}
                                 bodyData={workersRequestList}

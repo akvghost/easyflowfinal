@@ -1,13 +1,21 @@
 import axios from 'axios'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import { Link } from 'react-router-dom'
 export const UpdateCompanyPassword = () => {
+  const url = 'http://localhost:5000/api/companies/verifyotp'
   const [data, setData] = useState({
     email: "",
     otp: ""
+  })
+  const [response, setResponse] = useState({
+    data: "",
+    status: ""
+
   })
   function handle(e) {
     // e.preventDefault()  ;
@@ -28,7 +36,22 @@ export const UpdateCompanyPassword = () => {
     console.log("iam here");
     e.preventDefault();
     axios.post('http://localhost:5000/api/companies/sendotp', data)
-      .then((response) => console.log(response.data))
+    .then((res) => res)
+    .then((res) => {
+      response.status = res.status
+      if (response.status == "200") {
+        toast("Otp Successfuly Sent", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    })
+
 
   }
   const [verifydata, setVerifydata] = useState({
@@ -48,15 +71,79 @@ export const UpdateCompanyPassword = () => {
 
 
   }
-  const [otpres, setOtpres] = useState()
+  
   async function verifyotp(e) {
     e.preventDefault();
     verifydata.email = data.email
     console.log(verifydata)
-     await axios.post('http://localhost:5000/api/companies/verifyotp', verifydata)
-       .then((response) => setOtpres(response.data))
-       console.log(otpres)
+    try {
+      await axios.post(url, verifydata)
+        .then((res) => res)
+        .then((res) => {
+          response.status = res.status
+          response.data = res.data
+          if (response.status == "200") {
+            toast(response.data, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else {
+            console.log(response.data)
+            toast(response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
+        })
+    }catch (err) {
+      toast(err.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+      });
   }
+             setTimeout(() => {
+      checkislogin(e)
+    }, 5200)
+
+  }
+  function getcompanyId() {
+    axios.get('http://localhost:5000/api/companies/getcompanies')
+      .then((response) => response.data)
+      .then((res) => {
+        console.log(res)
+        data.email = res
+        
+
+      })
+  }
+  function checkislogin(e) {
+    e.preventDefault();
+
+    console.log(response.status)
+    window.location.href = "http://localhost:3000/updatecompanypass"
+
+
+  }
+  useEffect(() => {
+    getcompanyId()
+  })
   return (
     <div>
       <h2 className="page-header">Company</h2>
@@ -88,6 +175,16 @@ export const UpdateCompanyPassword = () => {
               </button>
             </Link>
           </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
         </form>
       </div>
     </div>

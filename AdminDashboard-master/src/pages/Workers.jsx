@@ -30,30 +30,27 @@ const renderBody = (item, index) => (
     </tr>
 )
 const Workers = (props) => {
-    const [ workerList, setWorkerList ] = useState([])
-    function getWorker(){
+    const [workerList, setWorkerList] = useState([])
+    function getWorker() {
         axios.get('http://localhost:5000/api/workers')
-             .then((response) => response.data)
-             .then((data) => {
-                 setWorkerList(data)
-                 
-             })
-             .catch(err => console.log("here's an error" + err))
-             
-             
+            .then((response) => response.data)
+            .then((data) => {
+                setWorkerList(data)
+
+            })
+            .catch(err => console.log("here's an error" + err))
+
+
     }
     useEffect(() => {
         getWorker()
     }, [])
     return (
         <div>
-            <Sidebar {...props}/>
+            <Sidebar {...props} />
             <h2 className="page-header">
                 workers
-                <div className="topnav__search">
-                    <input type="text" placeholder='Search here...' />
-                    <i className='bx bx-search'></i>
-                </div>
+
             </h2>
             <div className="row">
                 <div className="col-12">

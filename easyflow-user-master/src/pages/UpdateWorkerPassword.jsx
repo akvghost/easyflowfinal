@@ -1,33 +1,64 @@
 import axios from 'axios'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import { Link } from 'react-router-dom'
 
 export const UpdateWorkerPassword = () => {
+  const url = 'http://localhost:5000/api/workers/verifyotp'
   const [data, setData] = useState({
-    email: ""
-  })
-  const [verifydata, setVerifydata] = useState({
     email: "",
-    otp:""
+    otp: ""
   })
+  const [response, setResponse] = useState({
+    data: "",
+    status: ""
 
+  })
   function handle(e) {
-
+    // e.preventDefault()  ;
     console.log(e.target.value)
     console.log(e.target.id)
 
     const newdata = { ...data }
     newdata[e.target.id] = e.target.value
-    
     setData(newdata)
+    // console.log("new")
     console.log(newdata)
-
+    // console.log("data")
+    // console.log(data)
 
 
   }
+  function sendotp(e) {
+    console.log("iam here");
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/workers/sendotp', data)
+    .then((res) => res)
+    .then((res) => {
+      response.status = res.status
+      if (response.status == "200") {
+        toast("Otp Successfuly Sent", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    })
+
+
+  }
+  const [verifydata, setVerifydata] = useState({
+    email: "",
+    otp:""
+  })
   function handle1(e) {
 
     // console.log(e.target.value)
@@ -41,24 +72,80 @@ export const UpdateWorkerPassword = () => {
 
 
   }
-  // const [email , setEmail] = useState([])
-  function sendotp(e) {
-    e.preventDefault();
-   
-    axios.post('http://localhost:5000/api/workers/sendotp', data)
-      .then((response) => console.log(response.data))
-
-  }
-  const [otpres, setOtpres] = useState()
-  var x ;
-  function verifyotp(e) {
+  
+  async function verifyotp(e) {
     e.preventDefault();
     verifydata.email = data.email
     console.log(verifydata)
-    axios.post('http://localhost:5000/api/workers/verifyotp', verifydata)
-       .then((response) => setOtpres(response.data))
-       console.log(otpres)
+    try {
+      await axios.post(url, verifydata)
+        .then((res) => res)
+        .then((res) => {
+          response.status = res.status
+          response.data = res.data
+          if (response.status == "200") {
+            toast(response.data, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else {
+            console.log(response.data)
+            toast(response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
+        })
+    }catch (err) {
+      toast(err.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+      });
   }
+             setTimeout(() => {
+      checkislogin(e)
+    }, 5200)
+
+  }
+  function getworkerId() {
+    axios.get('http://localhost:5000/api/Workers/getworkers')
+      .then((response) => response.data)
+      .then((res) => {
+        console.log(res)
+        data.email = res
+        
+
+      })
+  }
+  function checkislogin(e) {
+    e.preventDefault();
+
+    console.log(response.status)
+    window.location.href = "http://localhost:3000/updateworkerpass"
+
+
+  }
+  useEffect(() => {
+    getworkerId()
+  })
+
   return (
     <div>
       <h2 className="page-header">Worker</h2>
@@ -70,7 +157,7 @@ export const UpdateWorkerPassword = () => {
             <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" className="form-control" id="email" onChange={(e) => handle(e)} value={data.email} />
+            <input type="email" className="form-control" id="email"onChange={(e) => handle(e)} value={data.email} />
           </div>
           <div className="col-md-6">
             <button type="submit" className="btn btn-primary" onClick={(e) => sendotp(e)}>
@@ -92,6 +179,16 @@ export const UpdateWorkerPassword = () => {
               </button>
             </Link>
           </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
         </form>
       </div>
     </div>
