@@ -1,17 +1,17 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/sidebar/Sidebar'
 
-    export const Admin = (props) => {
-    const url = "http://localhost:5000/api/admins/p"
+export const Admin = (props) => {
+    const url = "http://localhost:5000/api/admins/updateadmin"
     const [response, setResponse] = useState({
         data: "",
         status: ""
 
     })
-    const [id , setId]= useState([])
+    const [id, setId] = useState([])
     const [data, setData] = useState({
         Name: "",
         mobile: "",
@@ -30,7 +30,7 @@ import Sidebar from '../components/sidebar/Sidebar'
         e.preventDefault();
         console.log(data)
         try {
-            await axios.post(url, data,)
+            await axios.post(url, data)
                 .then((res) => res)
                 .then((res) => {
 
@@ -49,26 +49,49 @@ import Sidebar from '../components/sidebar/Sidebar'
                             progress: undefined,
                         });
                     }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+
 
                 })
         }
-        catch (err) { console.log(err) }
-        console.log(response.status)
-     }
-     
-      useEffect(() => {
-          setId("this is style")
-      })
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
+    }
+
+    useEffect(() => {
+        setId("this is style")
+    })
 
     return (
         <div>
-            <Sidebar {...props}/>
+            <Sidebar {...props} />
 
             <h2 className="page-header">Profile</h2>
             <div>
                 <form className="row g-3" onSubmit={(e) => submit(e)}>
                     <div className="col-md-4">
-                        <label  className="form-label" >
+                        <label className="form-label" >
                             ID
                         </label>
                         <input
@@ -76,7 +99,7 @@ import Sidebar from '../components/sidebar/Sidebar'
                             className="form-control"
                             placeholder={id}
                             //required=""
-                            disabled=""   
+                            disabled=""
                         />
                     </div>
                     <div className="col-md-4">
@@ -93,7 +116,7 @@ import Sidebar from '../components/sidebar/Sidebar'
                             onChange={(e) => handle(e)}
                         />
                     </div>
-                   
+
                     <div className="col-md-5">
                         <label htmlFor="validationDefault04" className="form-label">
                             Email
@@ -103,12 +126,12 @@ import Sidebar from '../components/sidebar/Sidebar'
                                 @
                             </span>
                             <input
-                                type="text"
+                                type="email"
                                 className="form-control"
                                 id="email"
                                 aria-describedby="inputGroupPrepend2"
                                 required=""
-                                value={data.email} 
+                                value={data.email}
                                 onChange={(e) => handle(e)}
                             />
                         </div>
@@ -125,7 +148,7 @@ import Sidebar from '../components/sidebar/Sidebar'
                                 className="form-control"
                                 id="mobile"
                                 required=""
-                                value={data.mobile} 
+                                value={data.mobile}
                                 onChange={(e) => handle(e)}
                             />
                         </div>
@@ -135,7 +158,16 @@ import Sidebar from '../components/sidebar/Sidebar'
                         <button className="btn btn-primary" type="submit" >
                             Update
                         </button>
-                      
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
                     </div>
                 </form>
 

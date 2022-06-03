@@ -1,113 +1,150 @@
 import axios from 'axios'
 import React from 'react'
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../components/sidebar/Sidebar'
 
 import { Link } from 'react-router-dom'
 const UpdatePassword = (props) => {
-  
-        const [data, setData] = useState({
-          email: "",
-          otp: ""
-        })
-        const [response , setResponse] = useState({
-          data:"",
-          status:""
-      
+  const url = 'http://localhost:5000/api/admins/verifyotp'
+  const [data, setData] = useState({
+    email: "",
+    otp: ""
+  })
+  const [response, setResponse] = useState({
+    data: "",
+    status: ""
+
+  })
+  function handle(e) {
+    // e.preventDefault()  ;
+    console.log(e.target.value)
+    console.log(e.target.id)
+
+    const newdata = { ...data }
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    // console.log("new")
+    console.log(newdata)
+    // console.log("data")
+    // console.log(data)
+
+
+  }
+  function sendotp(e) {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/admins/sendotp', data)
+      .then((res) => res)
+      .then((res) => {
+        response.status = res.status
+        if (response.status == "200") {
+          toast("Otp Successfuly Sent", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       })
-        function handle(e) {
-          // e.preventDefault()  ;
-          console.log(e.target.value)
-          console.log(e.target.id)
-      
-          const newdata = { ...data }
-          newdata[e.target.id] = e.target.value
-          setData(newdata)
-          // console.log("new")
-          console.log(newdata)
-          // console.log("data")
-          // console.log(data)
-      
-      
+
+  }
+  const [verifydata, setVerifydata] = useState({
+    email: "",
+    otp: ""
+  })
+  function handle1(e) {
+
+    // console.log(e.target.value)
+    // console.log(e.target.id)
+
+    const newdata = { ...verifydata }
+    newdata[e.target.id] = e.target.value
+    setVerifydata(newdata)
+    // console.log(verifydata)
+
+
+
+  }
+  async function verifyotp(e) {
+    e.preventDefault();
+    verifydata.email = data.email
+    console.log(verifydata)
+    try {
+      await axios.post(url, verifydata)
+        .then((res) => res)
+        .then((res) => {
+          response.status = res.status
+          response.data = res.data
+          if (response.status == "200") {
+            toast(response.data, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else {
+            console.log(response.data)
+            toast(response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
-        function sendotp(e) {
-          e.preventDefault();
-          axios.post('http://localhost:5000/api/admins/sendotp', data)
-            .then((res) => res)
-            .then((res) => {
-              response.status = res.status
-              if (response.status == "200") {
-                toast("Otp Successfuly Sent", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
-            })
-      
-        }
-        const [verifydata, setVerifydata] = useState({
-          email: "",
-          otp:""
+
         })
-        function handle1(e) {
-      
-          // console.log(e.target.value)
-          // console.log(e.target.id)
-      
-          const newdata = { ...verifydata }
-          newdata[e.target.id] = e.target.value
-          setVerifydata(newdata)
-          // console.log(verifydata)
-      
-      
-      
-        }
-        async function verifyotp(e) {
-          e.preventDefault();
-          verifydata.email = data.email
-          console.log(verifydata)
-           await axios.post('http://localhost:5000/api/admins/verifyotp', verifydata)
-             .then((res) => res)
-             .then((res) =>{
-              response.status = res.status
-              response.data = res.data
-              if (response.status == "200") {
-                toast(response.data, {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
+    }catch (err) {
+      toast(err.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+      });
+  }
+             setTimeout(() => {
+      checkislogin(e)
+    }, 5200)
 
-             })
-        }
-        function getadminId(){
-          axios.get('http://localhost:5000/api/admins/getadmin')
-              .then((response) => response.data)
-              .then((res) => {
-                  data.email = res.data
+  }
+  function getadminId() {
+    axios.get('http://localhost:5000/api/admins/getadmin')
+      .then((response) => response.data)
+      .then((res) => {
+        console.log(res)
+        data.email = res
+        
 
-              })
-            }
-useEffect(() => {
-  getadminId()
- })
+      })
+  }
+  function checkislogin(e) {
+    e.preventDefault();
 
-    return (
-        <div>
-                      <Sidebar {...props}/>
+    console.log(response.status)
+    window.location.href = "http://localhost:3000/updateadminpass"
 
+
+  }
+  useEffect(() => {
+    getadminId()
+  })
+
+  return (
+    <div>
+      <Sidebar {...props} />
       <h2 className="page-header">Admin</h2>
       <hr className="featurette-divider" />
       <h4 className="page-header">Update Profile</h4>
@@ -138,18 +175,18 @@ useEffect(() => {
             </Link>
           </div>
           <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover />
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
         </form>
       </div>
     </div>
-    )
+  )
 }
 export default UpdatePassword

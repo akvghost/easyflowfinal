@@ -1,14 +1,20 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export const RegisterAdmin = () => {
-    const url = "http://localhost:5000/api/workers/register"
+    const url = "http://localhost:5000/api/admins/register"
     const [data, setData] = useState({
         name: "",
         mobile: "",
         email: "",
-        password: ""
+        pass: ""
+    })
+    const [response, setResponse] = useState({
+        data: "",
+        status: ""
+
     })
     function handle(e) {
         // e.preventDefault()  ;
@@ -25,20 +31,72 @@ export const RegisterAdmin = () => {
 
 
     }
-    function submit(e) {
+    const submit = async (e) => {
         e.preventDefault();
         console.log(data)
-        axios.post(url, {
-            Name: data.name,
-            Mobile: data.mobile,
-            Mail: data.email,
-            pass: data.password,
+        try {
 
-        })
-            .then(res => {
-                setData(res.data)
-                console.log(data)
-            })
+            await axios.post(url, data)
+                .then((res) => res)
+                .then((res) => {
+
+                    response.status = res.status
+                    response.data = res.data
+
+                    if (response.status =="201" ) {
+                        toast("Admin Registerd", {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 10400)
+                    }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+
+                })
+        }   
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        console.log(response.status)
+
+
+
+    }
+    function checkislogin(e) {
+        e.preventDefault();
+
+        // alert("login succesful")
+        console.log(response.status)
+        window.location.href = "http://localhost:3000"
+        window.history(1);
+        // }
+        // else
     }
     return (
         <div>
@@ -98,16 +156,27 @@ export const RegisterAdmin = () => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="password"
+                                    id="pass"
                                     onChange={(e) => handle(e)}
-                                    value={data.password}
+                                    value={data.pass}
                                 />
                             </div>
                             <div className='col-12 my-4' >
                                 <button type="submit" className="btn btn-primary">
                                     Submit
                                 </button>
+                                <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover />
                             </div>
+                            
                             <a href="/loginadmin">Already Have Account?</a>
                         </form>
                     </div>

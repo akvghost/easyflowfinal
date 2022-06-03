@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Routes from '../components/Routes';
 import Sidebar from '../components/sidebar/Sidebar';
 
 export const LoginAdmin = () => {
@@ -28,22 +29,21 @@ export const LoginAdmin = () => {
 
 
     }
-    
+
 
     const submit = async (e) => {
         e.preventDefault();
         try {
-            
+
             await axios.post(url, data)
                 .then((res) => res)
                 .then((res) => {
 
                     response.status = res.status
                     response.data = res.data
-                    console.log(response.data)
-                    console.log(response.status)
-                    if (response.status == "204" || response.status == "200") {
-                        toast("Login Successful", {
+
+                    if ( response.status == "200") {
+                        toast(response.data, {
                             position: "bottom-right",
                             autoClose: 5000,
                             hideProgressBar: false,
@@ -52,18 +52,39 @@ export const LoginAdmin = () => {
                             draggable: true,
                             progress: undefined,
                         });
-                       
+                        setTimeout(() => {
+                            checkislogin(e)
+                        }, 5200)
+                    }
+                    else {
+                        console.log(response.data)
+                        toast(response.data, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
 
                 })
         }
-        catch (err) { console.log(err) }
+        catch (err) {
+            toast(err.response.data, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
         console.log(response.status)
-        setTimeout(() => {
-            checkislogin(e)
-        }, 5200)
 
-        return (<p>asdfasfsd</p>)
+
 
     }
     function checkislogin(e) {
@@ -71,7 +92,8 @@ export const LoginAdmin = () => {
 
         // alert("login succesful")
         console.log(response.status)
-        window.location.href = "http://localhost:3000/"
+        window.location.href = "http://localhost:3000/dashboard"
+        window.history(1);
         // }
         // else
         { console.log("in else") }
@@ -131,6 +153,7 @@ export const LoginAdmin = () => {
                             <a href="/registeradmin">New Here?</a>
 
                         </form>
+
                     </div>
                 </div>
             </div>
