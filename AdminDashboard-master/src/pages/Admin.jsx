@@ -3,12 +3,13 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
     export const Admin = () => {
-    const url = "http://localhost:5000/api/admins/update"
+    const url = "http://localhost:5000/api/admins/p"
     const [response, setResponse] = useState({
         data: "",
         status: ""
 
     })
+    const [id , setId]= useState([])
     const [data, setData] = useState({
         Name: "",
         mobile: "",
@@ -27,7 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
         e.preventDefault();
         console.log(data)
         try {
-            await axios.patch(url, data,)
+            await axios.post(url, data,)
                 .then((res) => res)
                 .then((res) => {
 
@@ -52,16 +53,9 @@ import 'react-toastify/dist/ReactToastify.css';
         catch (err) { console.log(err) }
         console.log(response.status)
      }
-     function checkp()
-     {
-         console.log("here")
-         axios.patch("http://localhost:5000/api/admins/p",{
-
-         })
-         .then((res) => console.log(res))
-     }
      
       useEffect(() => {
+          setId("this is style")
       })
 
     return (
@@ -76,7 +70,7 @@ import 'react-toastify/dist/ReactToastify.css';
                         <input
                             type="text"
                             className="form-control"
-                            placeholder=""
+                            placeholder={id}
                             //required=""
                             disabled=""   
                         />
@@ -137,7 +131,7 @@ import 'react-toastify/dist/ReactToastify.css';
                         <button className="btn btn-primary" type="submit" >
                             Update
                         </button>
-                        <p onClick={checkp()}>clik here</p>
+                      
                     </div>
                 </form>
 

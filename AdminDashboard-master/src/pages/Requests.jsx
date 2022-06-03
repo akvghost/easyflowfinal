@@ -5,6 +5,8 @@ import Table from '../components/table/Table'
 //import Badge from '../components/badge/Badge'
 import { Link } from 'react-router-dom'
 //import CompanyRequest from './CompanyRequest'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 const latestRequest = {
@@ -93,32 +95,54 @@ export const Requests = () => {
     }
     const sendRequestToWorker = () => {
         axios.get('http://localhost:5000/api/admins/postrequest/worker')
-        .then((res) => res).then((res) => {
+        .then((res) => res)
+        .then((res) => {
 
-            response.status=res.status
+            response.status = res.status
             response.data = res.data
             console.log(response.data)
             console.log(response.status)
-            // checkislogin()
+            if (response.status == "200") {
+                toast(response.data, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+
         })
         
-        console.log(response.status)
         
     }
     const sendRequestToCompany = () => {
         
         axios.get('http://localhost:5000/api/admins/postrequest/company')
-        .then((response) => response.data)
-        .then((res) => res).then((res) => {
+        .then((res) => res)
+        .then((res) => {
 
-            response.status=res.status
+            response.status = res.status
             response.data = res.data
             console.log(response.data)
             console.log(response.status)
-            // checkislogin()
+            if (response.status == "204" || response.status == "200") {
+                toast(response.data, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+
         })
+       
         
-        console.log(response.status)
     }
     const [workersRequestList, setWorkerRequestList] = useState([])
     function getWorkerRequestList(){
@@ -161,6 +185,16 @@ export const Requests = () => {
                                             title={item.title}
                                         />
                                     </Link>
+                                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover />
                                 </div>
                             ))
                         }
