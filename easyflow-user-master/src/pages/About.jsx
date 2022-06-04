@@ -1,4 +1,9 @@
 import React from 'react'
+// import fb from "E:/gols/prj/p1/EasyFlow/easyflow-user-master/src/assetsimages/fb.png"
+import fb1 from '../assets/images/fb.png'
+import ig from '../assets/images/ig.png'
+
+import tw from '../assets/images/tw.png'
 
 export const About = () => {
     return (
@@ -79,7 +84,7 @@ export const About = () => {
 
 
             </div>
-            <h2 className="page-header">Contact Us</h2>
+            {/* <h2 className="page-header">Contact Us</h2>
             <hr className="featurette-divider" />
             <div className="container">
                 <form className="row g-3">
@@ -129,7 +134,7 @@ export const About = () => {
                     </div>
                 </form>
 
-            </div>
+            </div> */}
             <div className="container">
   <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div className="col-md-4 d-flex align-items-center">
@@ -146,20 +151,20 @@ export const About = () => {
     <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
       <li className="ms-3">
       <a className="text-muted" href="https://twitter.com">
-          <img class="bd-placeholder-img" width="24" height="24" src="bx bxl-twitter"/>
+          <img class="bd-placeholder-img" width="24" height="24" src={tw}/>
         </a>
       </li>
       <li className="ms-3">
       <a className="text-muted" href="https://instagram.com">
-          <img class="bd-placeholder-img" width="24" height="24" src="bx bxl-instagram"/>
+          <img class="bd-placeholder-img" width="24" height="24" src={ig}/>
         </a>
       </li>
       <li className="ms-3">
         <a className="text-muted" href="https://facebook.com">
-          <img class="bd-placeholder-img" width="24" height="24" src="bx bxl-facebook"/>
-          
-          
+        <img class="bd-placeholder-img" width="24" height="24" src={fb1}/>
+
         </a>
+          
       </li>
     </ul>
   </footer>
